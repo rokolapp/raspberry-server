@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SpotifyControllerTest < ActionController::TestCase
+class ArtistControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

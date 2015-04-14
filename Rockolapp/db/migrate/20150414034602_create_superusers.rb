@@ -1,0 +1,8 @@
+class CreateSuperusers < ActiveRecord::Migration
+  def change
+    create_table :superusers do |t|
+
+      t.timestamps null: false
+    end
+  end
+end
