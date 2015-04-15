@@ -14,26 +14,40 @@
 ActiveRecord::Schema.define(version: 20150414203712) do
 
   create_table "admins", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "albums", force: :cascade do |t|
+    t.string   "album_type"
+    t.string   "name"
+    t.string   "uri"
+    t.string   "spotify_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "artists", force: :cascade do |t|
+    t.string   "name"
+    t.string   "uri"
+    t.string   "spotify_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "genres", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "superusers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

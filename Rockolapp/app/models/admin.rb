@@ -3,7 +3,7 @@ class Admin < ActiveRecord::Base
 		validates p, presence: true
 	end
 	
-	filter_parameter_logging :password
+	Rails.application.config.filter_parameters << :password
 
 	before_save :crypt_pass
 
@@ -11,7 +11,7 @@ class Admin < ActiveRecord::Base
 		self.password = BCrypt::Password.create(self.password)
 	end		
 
-	def shout
+	def self.shout
 		puts "NIGGER"
 	end	
 end
