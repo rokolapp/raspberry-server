@@ -1,0 +1,19 @@
+<h1>Admins</h1>
+
+<% @admins.each do |f| %>
+	<p>
+		<h2>Name</h2>
+		<br>
+		<%= f.name %>
+	</p>
+	<p>
+		<h2>E-mail</h2>
+		<br>
+		<%= f.email %>
+	</p>
+	<%= link_to 'Edit', "admin/#{f.id}/edit" %>
+	<%= link_to 'Delete', "admin/#{f.id}", method: 'delete', data:{confirm: 'Rlly m8?'} %>
+	<hr>
+<% end %>
+
+	

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414203712) do
+ActiveRecord::Schema.define(version: 20150419221236) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20150414203712) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "admins", ["email"], name: "index_admins_on_email"
 
   create_table "albums", force: :cascade do |t|
     t.string   "album_type"

@@ -1,0 +1,17 @@
+  <% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+  <% end %>
+
+<h1>Admin Data</h1>
+<p>
+	<h2>Name:</h2>
+	<br>
+	<%= @admin.name %>	
+</p>
+<p>
+	<h2>E-mail:</h2>
+	<br>
+	<%= @admin.email %>
+</p>
+<%= link_to 'Edit', "#{@admin.id}/edit" %>
+<%= link_to 'Delete', "#{@admin.id}", method: 'delete', data:{confirm: 'Rlly m8?'} %>

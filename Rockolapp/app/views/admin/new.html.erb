@@ -1,0 +1,19 @@
+<h1>Nuevo Admin</h1>
+<%= form_for :admin, url: '/admin', method: 'POST'  do |f| %>
+<p>
+	<%= f.label :name %>
+	<br>
+	<%= f.text_field :name %>
+</p>
+<p>
+	<%= f.label :email %>
+	<br>
+	<%= f.text_field :email %>
+</p>
+<p>
+	<%= f.label :Contraseña %>
+	<br>
+	<%= f.password_field :password %>
+</p>
+	<%= f.submit %>
+<% end %>

@@ -1,12 +1,14 @@
+require 'bcrypt'
 class Admin < ActiveRecord::Base
-	[:name, :email, :password].each do |p| 
-		validates p, presence: true
-	end
-	
+
 	Rails.application.config.filter_parameters << :password
 
-	before_save :crypt_pass
+	before_save :crypt_pass, :val_presence
 
+	def val_presence
+		validates_presence_of :name, :email, :password
+	end
+	
 	def crypt_pass
 		self.password = BCrypt::Password.create(self.password)
 	end		
