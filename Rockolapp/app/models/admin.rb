@@ -16,4 +16,8 @@ class Admin < ActiveRecord::Base
 	def self.shout
 		puts "NIGGER"
 	end	
+
+	def self.login(password)
+		if BCrypt::Password.new(self.password).is_pasword? password
+	end	
 end

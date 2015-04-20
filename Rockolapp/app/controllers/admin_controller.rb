@@ -51,13 +51,23 @@ class AdminController < ApplicationController
 		Admin.shout
 	end
 	def login
-
+		if request.get?
+			render 'login'
+		else
+			puts login_params
+			@admin = Admin.find_by_email!(login_params)
+			if @admin.login(login_params)
+				redirect_to '/admins'
+			else
+				redirecto_to '/login'
+			end
+		end
 	end
 	private
 		def admin_params
 			params.require(:admin).permit(:email, :password, :name)
 		end
 		def  login_params
-			params.require(:admin).permit
+			params.require(:login).permit(:email, :password)
 		end
 end
