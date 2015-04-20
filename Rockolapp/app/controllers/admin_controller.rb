@@ -5,6 +5,7 @@ class AdminController < ApplicationController
 	end
 
 	def new
+		@admin = Admin.new
 	end
 
 	def show
@@ -49,9 +50,14 @@ class AdminController < ApplicationController
 		redirect_to '/'
 		Admin.shout
 	end
+	def login
 
+	end
 	private
 		def admin_params
 			params.require(:admin).permit(:email, :password, :name)
+		end
+		def  login_params
+			params.require(:admin).permit
 		end
 end

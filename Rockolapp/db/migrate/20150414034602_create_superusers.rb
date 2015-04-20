@@ -7,5 +7,6 @@ class CreateSuperusers < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    add_index :superusers, :email, unique: true
   end
 end
