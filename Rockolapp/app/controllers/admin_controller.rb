@@ -9,9 +9,14 @@ class AdminController < ApplicationController
 	end
 
 	def show
-		@admin = Admin.find(params[:id])
-		rescue ActiveRecord::RecordNotFound
+		puts "Session= #{session[:user]}"
+		if session[:user] and session[:user] == params[:id].to_i
+			@admin = Admin.find(params[:id])
+		else
 			redirect_to '/'
+		end
+		rescue ActiveRecord::RecordNotFound
+			redirect_to '/404.html'
 	end
 
 	def create 
@@ -46,21 +51,25 @@ class AdminController < ApplicationController
 		end
 	end
 
-	def shout
-		redirect_to '/'
-		Admin.shout
-	end
 	def login
 		if request.get?
 			render 'login'
 		else
-			puts login_params
-			@admin = Admin.find_by_email!(login_params)
-			if @admin.login(login_params)
-				redirect_to '/admins'
+			if @admin = Admin.login(login_params) 
+				session[:user] = @admin.id
+				redirect_to @admin
 			else
-				redirecto_to '/login'
+				redirect_to '/login/admin'
 			end
+		end
+	end
+
+	def logout
+		if session[:user]
+			reset_session
+			render 'logout'
+		else
+			redirect_to '/'
 		end
 	end
 	private
