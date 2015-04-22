@@ -9,14 +9,13 @@ class AdminController < ApplicationController
 	end
 
 	def show
-		puts "Session= #{session[:user]}"
-		if session[:user] and session[:user] == params[:id].to_i
+		if is_user? params[:id].to_i
 			@admin = Admin.find(params[:id])
 		else
 			redirect_to '/'
 		end
 		rescue ActiveRecord::RecordNotFound
-			redirect_to '/404.html'
+			render 'no_record'
 	end
 
 	def create 
@@ -30,15 +29,25 @@ class AdminController < ApplicationController
 	end
 
 	def edit
-		@admin = Admin.find(params[:id])
+		if is_user? params[:id].to_i
+			@admin = Admin.find(params[:id])
+		else
+			redirect_to '/'
+		end
+		rescue ActiveRecord::RecordNotFound
+			render 'no_record'
 	end
 
-	def update 
-		@admin = Admin.find(params[:id])
-		if @admin.update(admin_params)
+	def update
+		if is_user? params[:id].to_i
+			@admin = Admin.find(params[:id])
+			if @admin.update(admin_params)
 			redirect_to @admin
+			else
+				render 'edit'
+			end		
 		else
-			render 'edit'
+			redirect_to ''
 		end
 	end
 
@@ -76,7 +85,12 @@ class AdminController < ApplicationController
 		def admin_params
 			params.require(:admin).permit(:email, :password, :name)
 		end
+
 		def  login_params
 			params.require(:login).permit(:email, :password)
+		end
+
+		def is_user?(id)
+			session[:user] and session[:user] == id
 		end
 end
