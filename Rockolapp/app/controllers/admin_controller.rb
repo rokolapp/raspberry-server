@@ -1,7 +1,11 @@
 class AdminController < ApplicationController
 
 	def index
-		@admins = Admin.all
+		if is_logged?
+			@admins = Admin.all
+		else
+			render 'no_aut'
+		end
 	end
 
 	def new
@@ -9,10 +13,10 @@ class AdminController < ApplicationController
 	end
 
 	def show
-		if is_user? params[:id].to_i
+		if is_user? params[:id]
 			@admin = Admin.find(params[:id])
 		else
-			redirect_to '/'
+			render 'no_aut'
 		end
 		rescue ActiveRecord::RecordNotFound
 			render 'no_record'
@@ -22,24 +26,24 @@ class AdminController < ApplicationController
 		@admin = Admin.new(admin_params)
 
 		if @admin.save
-			redirect_to @admin
+			redirect_to login_path
 		else
 			render 'new'
 		end
 	end
 
 	def edit
-		if is_user? params[:id].to_i
+		if is logged? and is_user? params[:id]
 			@admin = Admin.find(params[:id])
 		else
-			redirect_to '/'
+			redirect_to 'no_aut'
 		end
 		rescue ActiveRecord::RecordNotFound
 			render 'no_record'
 	end
 
 	def update
-		if is_user? params[:id].to_i
+		if is_logged? and is_user? params[:id]
 			@admin = Admin.find(params[:id])
 			if @admin.update(admin_params)
 			redirect_to @admin
@@ -47,50 +51,34 @@ class AdminController < ApplicationController
 				render 'edit'
 			end		
 		else
-			redirect_to ''
+			render 'no_aut'
 		end
 	end
 
 	def destroy
-		@admin = Admin.find(params[:id])
-		if @admin.destroy
-			redirect_to 'index'
-		else
-			render 'index'
-		end
-	end
-
-	def login
-		if request.get?
-			render 'login'
-		else
-			if @admin = Admin.login(login_params) 
-				session[:user] = @admin.id
-				redirect_to @admin
+		if is_logged? and is_user? params[:id]
+			@admin = Admin.find(params[:id])
+			if @admin.destroy
+				redirect_to 'index'
 			else
-				redirect_to '/login/admin'
+				redirect_to 'no_aut'
 			end
 		end
-	end
-
-	def logout
-		if session[:user]
-			reset_session
-			render 'logout'
-		else
-			redirect_to '/'
-		end
+		rescue ActiveRecord::RecordNotFound
+			render 'no_record'		
 	end
 	private
-		def admin_params
-			params.require(:admin).permit(:email, :password, :name)
-		end
-
-		def  login_params
-			params.require(:login).permit(:email, :password)
-		end
-
 		def is_user?(id)
-			session[:user] and session[:user] == id
+			puts "EL NUMERO CHIDO ES: #{session[:admin][:id]}"
+			if session[:superuser]
+				return true;
+			elsif session[:admin] and session[:admin][:id] == id
+				return true;
+			else
+				return nil;
+			end
+		end
+		def is_logged?
+			session[:admin] or session[:superuser]
 		end
 end

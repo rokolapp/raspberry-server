@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
+
+  root 'index#index'
+
   resources :admin, :superuser
-  get '/login/admin'=>'admin#login'
-  post '/login/admin'=>'admin#login'
-  get '/logout/admin' => 'admin#logout'
+
+  get '/login' => 'sessions#login', as: 'login'
+  post '/login' => 'sessions#login'
+  get '/logout' => 'sessions#logout'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
