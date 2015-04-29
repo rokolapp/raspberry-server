@@ -4,9 +4,11 @@ class SessionsController < ApplicationController
 		if request.get?
 			render 'login'
 		else
-			if user_param == 'admin' and on_session?
-				login_admins(login_params)
-			elsif user_param == 'superuser' and on_session?
+			puts user_param
+			if user_param == 'admin'
+				puts "Se confirmó el user"
+				login_admins login_params
+			elsif user_param == 'superuser'
 				login_superuser
 			end
 		end
@@ -29,8 +31,8 @@ class SessionsController < ApplicationController
 			return true
 		end
 	end
-	def login_admins(login_params)
-		if @admin = Admin.login(login_params) 
+	def login_admins(params)
+		if @admin = Admin.login(params) 
 			session[:admin] = @admin.id
 			redirect_to @admin
 		else
@@ -42,7 +44,9 @@ class SessionsController < ApplicationController
 		
 	end
 	def user_param
-		params.require(:login).permit(:user)
+		user = params.require(:login).permit(:user)
+		user = user[:user]
+		return user
 	end
 	def  login_params
 		params.require(:login).permit(:email, :password)

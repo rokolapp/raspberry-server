@@ -2,6 +2,11 @@
 
 <% @admins.each do |f| %>
 	<p>
+		<h2>Id</h2>
+		<br>
+		<%= f.id %>
+	</p>
+	<p>
 		<h2>Name</h2>
 		<br>
 		<%= f.name %>
@@ -11,8 +16,10 @@
 		<br>
 		<%= f.email %>
 	</p>
-	<%= link_to 'Edit', "admin/#{f.id}/edit" %>
-	<%= link_to 'Delete', "admin/#{f.id}", method: 'delete', data:{confirm: 'Rlly m8?'} %>
+	<% if session[:admin] == (f.id).to_i or session[:superuser] %>
+		<%= link_to 'Edit', "admin/#{f.id}/edit" %>
+		<%= link_to 'Delete', "admin/#{f.id}", method: 'delete', data:{confirm: 'Rlly m8?'} %>
+	<% end %>
 	<hr>
 <% end %>
 

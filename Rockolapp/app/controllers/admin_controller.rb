@@ -13,7 +13,7 @@ class AdminController < ApplicationController
 	end
 
 	def show
-		if is_user? params[:id]
+		if is_user? params[:id].to_i
 			@admin = Admin.find(params[:id])
 		else
 			render 'no_aut'
@@ -33,7 +33,7 @@ class AdminController < ApplicationController
 	end
 
 	def edit
-		if is logged? and is_user? params[:id]
+		if is_logged? and is_user? params[:id].to_i
 			@admin = Admin.find(params[:id])
 		else
 			redirect_to 'no_aut'
@@ -43,7 +43,7 @@ class AdminController < ApplicationController
 	end
 
 	def update
-		if is_logged? and is_user? params[:id]
+		if is_logged? and is_user? params[:id].to_i
 			@admin = Admin.find(params[:id])
 			if @admin.update(admin_params)
 			redirect_to @admin
@@ -56,7 +56,7 @@ class AdminController < ApplicationController
 	end
 
 	def destroy
-		if is_logged? and is_user? params[:id]
+		if is_logged? and is_user? params[:id].to_i
 			@admin = Admin.find(params[:id])
 			if @admin.destroy
 				redirect_to 'index'
@@ -68,11 +68,14 @@ class AdminController < ApplicationController
 			render 'no_record'		
 	end
 	private
+		def admin_params
+			params.require(:admin).permit(:name, :email, :password)
+		end
 		def is_user?(id)
-			puts "EL NUMERO CHIDO ES: #{session[:admin][:id]}"
+			puts "EL NUMERO CHIDO ES: #{session[:admin]}"
 			if session[:superuser]
 				return true;
-			elsif session[:admin] and session[:admin][:id] == id
+			elsif session[:admin] and session[:admin].to_i == id
 				return true;
 			else
 				return nil;
