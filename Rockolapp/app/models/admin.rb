@@ -3,7 +3,8 @@ class Admin < ActiveRecord::Base
 
 	Rails.application.config.filter_parameters << :password
 
-	before_save :crypt_pass, :val_presence
+	before_save  :val_presence, :crypt_pass
+	validates :email, uniqueness: true
 
 	def self.login(parameters)
 
@@ -24,7 +25,7 @@ class Admin < ActiveRecord::Base
 	def val_presence
 		validates_presence_of :name, :email, :password
 	end
-	
+
 	def crypt_pass
 		self.password = BCrypt::Password.create(self.password)
 	end	

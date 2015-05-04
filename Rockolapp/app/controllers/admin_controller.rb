@@ -8,7 +8,7 @@ class AdminController < ApplicationController
 		end
 	end
 
-	def new
+	def new	
 		@admin = Admin.new
 	end
 
@@ -30,6 +30,8 @@ class AdminController < ApplicationController
 		else
 			render 'new'
 		end
+		rescue ActiveRecord
+			render 'new'
 	end
 
 	def edit

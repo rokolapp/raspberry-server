@@ -2,10 +2,10 @@ Rails.application.routes.draw do
 
   root 'index#index'
 
-  resources :admin, :superuser
+  resources :admin, :superuser, :genre, :artist, :track, :album
 
   get '/login' => 'sessions#login', as: 'login'
-  post '/login' => 'sessions#login'
+  post '/login' => 'sessions#loging'
   get '/logout' => 'sessions#logout'
   
   # The priority is based upon order of creation: first created -> highest priority.

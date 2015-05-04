@@ -1,0 +1,11 @@
+<%= form_for :genre, url: '/genre', method: 'POST' do |f| %>
+	<h1>Nuevo Género</h1>
+	<p>
+		<%= f.label :name %>
+		<br>
+		<%= f.text_field :name %>
+	</p>
+	<p>
+		<%= f.submit(value: 'Registrar nuevo género') %>
+	</p>
+<% end %>

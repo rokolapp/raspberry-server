@@ -1,5 +1,11 @@
-<h1>Nuevo Admin</h1>
+<% if @admin.errors.any? %>
+	<h1>Se encontraron los siguientes errores al crear un nuevo administrador:</h1>
+	<% @admin.errors.full_messages.each do |e| %>
+	<li><%= e %></li>
+	<% end %>
+<% end %>
 <%= form_for :admin, url: '/admin', method: 'POST'  do |f| %>
+<h1>Nuevo Admin</h1>
 <p>
 	<%= f.label :name %>
 	<br>
