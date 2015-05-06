@@ -1,3 +1,9 @@
+<% if @genre.errors.any? %>
+	<h1>Se encontraron los siguientes errores al registrar un nuevo género:</h1>
+	<% @genre.errors.full_messages.each do |e| %>
+	<li><%= e %></li>
+	<% end %>
+<% end %>
 <%= form_for :genre, url: '/genre', method: 'POST' do |f| %>
 	<h1>Nuevo Género</h1>
 	<p>

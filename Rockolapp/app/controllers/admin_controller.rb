@@ -7,11 +7,7 @@ class AdminController < ApplicationController
 			render 'no_aut'
 		end
 	end
-
-	def new	
-		@admin = Admin.new
-	end
-
+	
 	def show
 		if is_user? params[:id].to_i
 			@admin = Admin.find(params[:id])
@@ -22,6 +18,10 @@ class AdminController < ApplicationController
 			render 'no_record'
 	end
 
+	def new	
+		@admin = Admin.new
+	end
+
 	def create 
 		@admin = Admin.new(admin_params)
 
@@ -30,8 +30,6 @@ class AdminController < ApplicationController
 		else
 			render 'new'
 		end
-		rescue ActiveRecord
-			render 'new'
 	end
 
 	def edit
@@ -74,7 +72,6 @@ class AdminController < ApplicationController
 			params.require(:admin).permit(:name, :email, :password)
 		end
 		def is_user?(id)
-			puts "EL NUMERO CHIDO ES: #{session[:admin]}"
 			if session[:superuser]
 				return true;
 			elsif session[:admin] and session[:admin].to_i == id
