@@ -4,7 +4,7 @@ class AdminController < ApplicationController
 		if is_logged?
 			@admins = Admin.all
 		else
-			render 'no_aut'
+			render_no_aut
 		end
 	end
 	
@@ -12,10 +12,10 @@ class AdminController < ApplicationController
 		if is_user? params[:id].to_i
 			@admin = Admin.find(params[:id])
 		else
-			render 'no_aut'
+			render_no_aut
 		end
 		rescue ActiveRecord::RecordNotFound
-			render 'no_record'
+			render template: 'errors/no_record'
 	end
 
 	def new	
@@ -36,10 +36,10 @@ class AdminController < ApplicationController
 		if is_logged? and is_user? params[:id].to_i
 			@admin = Admin.find(params[:id])
 		else
-			redirect_to 'no_aut'
+			render_no_aut
 		end
 		rescue ActiveRecord::RecordNotFound
-			render 'no_record'
+			render template: 'errors/no_record'
 	end
 
 	def update
@@ -51,7 +51,7 @@ class AdminController < ApplicationController
 				render 'edit'
 			end		
 		else
-			render 'no_aut'
+			render_no_aut
 		end
 	end
 
@@ -71,6 +71,7 @@ class AdminController < ApplicationController
 		def admin_params
 			params.require(:admin).permit(:name, :email, :password)
 		end
+
 		def is_user?(id)
 			if session[:superuser]
 				return true;
@@ -80,7 +81,13 @@ class AdminController < ApplicationController
 				return nil;
 			end
 		end
+
 		def is_logged?
 			session[:admin] or session[:superuser]
+		end
+
+		def render_no_aut
+			@resource = 'Admin'
+			render template: 'errors/no_aut'
 		end
 end

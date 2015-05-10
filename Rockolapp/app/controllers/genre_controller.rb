@@ -1,4 +1,12 @@
 class GenreController < ApplicationController
+	def index
+		if is_logged?
+			@genres = Genre.all	
+		else
+			render template: 'errors/no_aut'
+		end	
+	end
+
 	def new
 		@genre = Genre.new
 	end
@@ -25,9 +33,5 @@ class GenreController < ApplicationController
 
 	def is_logged?
 		session[:admin] or session[:superuser]
-	end
-
-	def search_genre
-		f = File.open("#{Rails.public_path}'\'")
 	end
 end
