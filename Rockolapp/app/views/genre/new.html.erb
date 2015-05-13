@@ -11,6 +11,11 @@
 		<br>
 		<%= f.text_field :name %>
 	</p>
+	<p>	
+		<%= f.label :Mode %>
+		<br>
+		<%= f.select :mode, options_for_select([['White-list', 'whitelist'],['Black-list', 'blacklist'],['Free-for-all', 'freeforall']]) %>
+	</p>
 	<p>
 		<%= f.submit(value: 'Registrar nuevo género') %>
 	</p>
