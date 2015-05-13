@@ -1,0 +1,14 @@
+<h1>Géneros</h1>
+<% @genres.each do |f| %>
+	<p>
+		<h2>Nombre:</h2>
+		<br>
+		<%= f.name %>
+	</p>
+	<p>
+		<h2>Modo:</h2>
+		<br>
+		<%= f.mode %>
+	</p>
+	<hr>
+<%end%>

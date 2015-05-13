@@ -38,9 +38,9 @@ ActiveRecord::Schema.define(version: 20150420015156) do
     t.string "mode",null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    add_index "genres", ["name"], name: "index_genres_on_name", unique: true
-    enum mode: [:whitelist, :blacklist, :freeforall]
   end
+  
+  add_index "genres", ["name"], name: "index_genres_on_name", unique: true
 
   create_table "superusers", force: :cascade do |t|
     t.datetime "created_at", null: false

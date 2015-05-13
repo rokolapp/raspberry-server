@@ -1,10 +1,10 @@
 class GenreController < ApplicationController
 	def index
-		if is_logged?
-			@genres = Genre.all	
-		else
-			render template: 'errors/no_aut'
-		end	
+		@genres = Genre.all	if is_logged?
+	end
+
+	def show
+		@genre = Genre.find(params[:id]) if is_logged?
 	end
 
 	def new
@@ -28,10 +28,14 @@ class GenreController < ApplicationController
 
 	private
 	def genre_params
-		params.require(:genre).permit(:name)
+		params.require(:genre).permit(:name, :mode)
 	end
 
 	def is_logged?
-		session[:admin] or session[:superuser]
+		if session[:admin] or session[:superuser]
+			return true
+		else
+			render template: 'errors/no_aut'
+		end
 	end
 end
