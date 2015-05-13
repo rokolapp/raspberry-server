@@ -7,3 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Admin.create(name: 'a', email: 'a', password: 'a')
+Genre.create(name: 'Rock', mode:'whitelist')
