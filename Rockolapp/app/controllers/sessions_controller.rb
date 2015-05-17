@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 		if user_param == 'admin'
 			login_admins login_params
 		elsif user_param == 'superuser'
-			login_superuser
+			login_superuser login_params
 		end
 	end
 
@@ -36,8 +36,14 @@ class SessionsController < ApplicationController
 			redirect_to '/login'
 		end
 	end
-	def login_superuser
-		
+	def login_superuser(params)
+		if @superuser = Superuser.login(params) 
+			session[:superuser] = @superuser.id
+			redirect_to @superuser
+		else
+			flash[:notice] = 'Nombre de usuario o contraseña incorrecta'
+			redirect_to '/login'
+		end
 	end
 	def user_param
 		user = params.require(:login).permit(:user)

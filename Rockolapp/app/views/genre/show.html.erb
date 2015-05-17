@@ -4,5 +4,9 @@
 </p>
 <h2>Modo:</h2>
 <p>
-	<%= @genre.mode %>
+	<%= read_mode @genre.mode %>
+</p>
+<p>
+	<%= link_to 'Edit', "#{@genre.id}/edit" %>
+	<%= link_to 'Delete', "#{@genre.id}", method: 'delete', data:{confirm: 'Rlly m8?'} %>
 </p>

@@ -1,93 +1,81 @@
 class AdminController < ApplicationController
-
 	def index
-		if is_logged?
-			@admins = Admin.all
-		else
-			render_no_aut
-		end
+		@admins = Admin.all if is_logged?
 	end
 	
 	def show
-		if is_user? params[:id].to_i
-			@admin = Admin.find(params[:id])
-		else
-			render_no_aut
-		end
+		@admin = Admin.find(params[:id]) if is_user? params[:id].to_i
 		rescue ActiveRecord::RecordNotFound
 			render template: 'errors/no_record'
 	end
 
 	def new	
-		@admin = Admin.new
+		@admin = Admin.new if is_logged?
 	end
 
 	def create 
 		@admin = Admin.new(admin_params)
 
-		if @admin.save
-			redirect_to login_path
+		if session[:superuser] and @admin.save
+			redirect_to admin_index_path
 		else
 			render 'new'
 		end
 	end
 
 	def edit
-		if is_logged? and is_user? params[:id].to_i
-			@admin = Admin.find(params[:id])
-		else
-			render_no_aut
-		end
+		@admin = Admin.find(params[:id]) if is_logged? and is_user? params[:id].to_i
 		rescue ActiveRecord::RecordNotFound
 			render template: 'errors/no_record'
 	end
 
 	def update
-		if is_logged? and is_user? params[:id].to_i
-			@admin = Admin.find(params[:id])
-			if @admin.update(admin_params)
-			redirect_to @admin
-			else
-				render 'edit'
-			end		
+		@admin = Admin.find(params[:id]) if is_user? params[:id].to_i
+		if session[:admin] or session[:superuser] and @admin.update(admin_params)
+		redirect_to @admin
 		else
-			render_no_aut
-		end
+			render 'edit'
+		end		
+		rescue ActiveRecord::RecordNotFound
+			render 'errors/no_record'	
 	end
 
 	def destroy
-		if is_logged? and is_user? params[:id].to_i
-			@admin = Admin.find(params[:id])
-			if @admin.destroy
-				redirect_to 'index'
-			else
-				redirect_to 'no_aut'
-			end
+		@admin = Admin.find(params[:id]) if is_user? params[:id].to_i
+
+		if session[:admin] or session[:superuser] and @admin.destroy
+			redirect_to 'index'
+		else
+			render 'errors/fatal_error'
 		end
 		rescue ActiveRecord::RecordNotFound
-			render 'no_record'		
+			render 'errors/no_record'		
 	end
 	private
-		def admin_params
-			params.require(:admin).permit(:name, :email, :password)
-		end
+	def admin_params
+		params.require(:admin).permit(:name, :email, :password)
+	end
 
-		def is_user?(id)
-			if session[:superuser]
-				return true;
-			elsif session[:admin] and session[:admin].to_i == id
-				return true;
-			else
-				return nil;
-			end
+	def is_user?(id)
+		if session[:superuser]
+			return true;
+		elsif session[:admin] and session[:admin].to_i == id
+			return true;
+		else
+			return nil;
 		end
+	end
 
-		def is_logged?
-			session[:admin] or session[:superuser]
-		end
-
-		def render_no_aut
-			@resource = 'Admin'
+	def is_logged?
+		if session[:admin] or session[:superuser]
+			return true
+		else
 			render template: 'errors/no_aut'
 		end
+	end
+
+	def render_no_aut
+		@resource = 'Admin'
+		render template: 'errors/no_aut'
+	end
 end

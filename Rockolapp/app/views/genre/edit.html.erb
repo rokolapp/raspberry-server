@@ -4,19 +4,19 @@
 	<li><%= e %></li>
 	<% end %>
 <% end %>
-<%= form_for :genre, url: '/genre', method: 'POST' do |f| %>
+<%= form_for :genre, url: "/genre/#{@genre.id}", method: :PUT do |f| %>
 	<h1>Nuevo Género</h1>
 	<p>
 		<%= f.label :name %>
 		<br>
-		<%= f.text_field :name %>
+		<%= f.text_field :name, value: @genre.name %>
 	</p>
 	<p>
 		<%= f.label :mode %>
 		<br>
-		<%= f.select :mode, options_for_select([['White-list', 'whitelist'], ['Black-list', 'blacklist'], ['Free-for-all', 'freeforall']])%>
+		<%= f.select :mode, options_for_select([['White-list', 'whitelist'], ['Black-list', 'blacklist'], ['Free-for-all', 'freeforall']]), value: @genre.mode %>
 	</p>
 	<p>
-		<%= f.submit(value: 'Registrar nuevo género') %>
+		<%= f.submit(value: 'Actualizar') %>
 	</p>
 <% end %>
