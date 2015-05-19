@@ -1,3 +1,27 @@
+function post(id){
+	console.log(id);
+	token = $('#'+id+"_token").val();
+	name = $('#'+id+"_name").val();
+	uri = $('#'+id+"_uri").val();
+	sId = $('#'+id+"_id").val();
+	if(confirm('¿Desea registrar el artista?')){
+		$.ajax({
+			type: 'POST',
+			url: '/artist',
+			data: {
+				token: token,
+				name: name,
+				uri: uri,
+				spotify_id: sId
+			}
+		}).done(function(){
+			alert('Registro exitoso')
+		}).fail(function(xhr, status, error){
+			alert(xhr.getResponseHeader('errors'));
+		});
+	}
+	else{}
+}
 function create_forms (data){
 	artistsForms = $('#artists_forms');
 	artistsForms.html('');
@@ -17,22 +41,27 @@ function create_forms (data){
 		}
 		uri = artists[i].uri;
 		id = artists[i].id
+		autToken = $('#authenticity_tokens').val();
 		artistsForms.append(
 			"<hr>"+
-			"<form id='artist_form_for_"+id+"' style='cursor:pointer' method='POST' action='/artist'>"+
+			"<form class='artist_forms' id='artist_form_for_"+id+"' value='"+id+"' style='cursor:pointer' method='POST' action='/artist' onclick=\"post('"+id+"')\">"+
+			"<input type='hidden' id='"+id+"_token'name='authenticity_token' value='"+autToken+"'>"+
 				"<div class='artist_image'>"+
 					"<label>Imágen</label><br>"+
 					"<img src='"+image+"' width='100' height='200'>"+
 				"</div>"+
-				"<div id='artist_name_"+name+"'>"+
+				"<div>"+
+					"<input type='hidden' id='"+id+"_name' value='"+name+"'>"+
 					"<label>Nombre</label><br>"+
 						name+
 				"</div>"+
-				"<div id='artist_uri_"+uri+"''>"+
+				"<div>"+
+					"<input type='hidden' id='"+id+"_uri' value='"+uri+"'>"+
 					"<label>Uri</label><br>"+
 					uri+
 				"</div>"+
-				"<div id='artist_id'>"+
+				"<div>"+
+					"<input type='hidden' id='"+id+"_id' value='"+id+"'>"+
 					"<label>Spotify Id</label><br>"+
 					id+
 				"</div>"+
@@ -49,4 +78,5 @@ $(document).ready(function(){
 		});
 		}
 	);
+	$('#')
 });

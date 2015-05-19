@@ -1,3 +1,4 @@
+
 class GenreController < ApplicationController
 	def index
 		@genres = Genre.all	if is_logged?

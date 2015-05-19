@@ -1,7 +1,6 @@
 class Genre < ActiveRecord::Base
 
 	before_save :search_genre, :PUTO_NEGRO_DE_MIERDA
-	#enum mode: [:whitelist, :blacklist, :freeforall]
 
 	private
 	def search_genre
@@ -19,8 +18,8 @@ class Genre < ActiveRecord::Base
 	end
 
 	def PUTO_NEGRO_DE_MIERDA
-		unless self.mode == "whitelist" or self.mode == "blacklist" or self.mode == "freeforall"
-			errors.add(:mode, "Solo puede seleccionar uno de estos métodos: White-list, Black-list o Free-for-all")
+		unless self.mode == "whitelist" or self.mode == "blacklist"
+			errors.add(:mode, "Solo puede seleccionar uno de estos tipos de listas: White-list o Black-list")
 			return false
 		end
 	end

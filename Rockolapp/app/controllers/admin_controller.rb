@@ -4,7 +4,11 @@ class AdminController < ApplicationController
 	end
 	
 	def show
-		@admin = Admin.find(params[:id]) if is_user? params[:id].to_i
+		if is_user? params[:id].to_i
+			@admin = Admin.find(params[:id]) 
+		else
+			render template: 'errors/no_aut'
+		end
 		rescue ActiveRecord::RecordNotFound
 			render template: 'errors/no_record'
 	end
