@@ -12,9 +12,9 @@
 		<%= f.text_field :name, value: @genre.name %>
 	</p>
 	<p>
-		<%= f.label :mode %>
+		<%= f.label :list %>
 		<br>
-		<%= f.select :mode, options_for_select([['White-list', 'whitelist'], ['Black-list', 'blacklist'], ['Free-for-all', 'freeforall']]), value: @genre.mode %>
+		<%= f.select :list, options_for_select([['White-list', 'whitelist'], ['Black-list', 'blacklist'], ['Free-for-all', 'freeforall']]), value: @genre.list %>
 	</p>
 	<p>
 		<%= f.submit(value: 'Actualizar') %>

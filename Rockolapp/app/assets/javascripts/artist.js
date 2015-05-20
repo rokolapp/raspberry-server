@@ -1,9 +1,10 @@
-function post(id){
+function post(id,list){
 	console.log(id);
 	token = $('#'+id+"_token").val();
 	name = $('#'+id+"_name").val();
 	uri = $('#'+id+"_uri").val();
 	sId = $('#'+id+"_id").val();
+	lista = list;
 	if(confirm('¿Desea registrar el artista?')){
 		$.ajax({
 			type: 'POST',
@@ -12,7 +13,8 @@ function post(id){
 				token: token,
 				name: name,
 				uri: uri,
-				spotify_id: sId
+				spotify_id: sId,
+				list: lista
 			}
 		}).done(function(){
 			alert('Registro exitoso')
@@ -44,29 +46,33 @@ function create_forms (data){
 		autToken = $('#authenticity_tokens').val();
 		artistsForms.append(
 			"<hr>"+
-			"<form class='artist_forms' id='artist_form_for_"+id+"' value='"+id+"' style='cursor:pointer' method='POST' action='/artist' onclick=\"post('"+id+"')\">"+
+			"<div class='artist_forms' id='artist_form_for_"+id+"'>"+
 			"<input type='hidden' id='"+id+"_token'name='authenticity_token' value='"+autToken+"'>"+
 				"<div class='artist_image'>"+
-					"<label>Imágen</label><br>"+
+					"<label>Imágen:</label><br>"+
 					"<img src='"+image+"' width='100' height='200'>"+
 				"</div>"+
 				"<div>"+
 					"<input type='hidden' id='"+id+"_name' value='"+name+"'>"+
-					"<label>Nombre</label><br>"+
+					"<label>Nombre:</label><br>"+
 						name+
 				"</div>"+
 				"<div>"+
 					"<input type='hidden' id='"+id+"_uri' value='"+uri+"'>"+
-					"<label>Uri</label><br>"+
+					"<label>Uri:</label><br>"+
 					uri+
 				"</div>"+
 				"<div>"+
 					"<input type='hidden' id='"+id+"_id' value='"+id+"'>"+
-					"<label>Spotify Id</label><br>"+
+					"<label>Spotify Id:</label><br>"+
 					id+
 				"</div>"+
+				"<div>"+
+					"<label>Lista:</label><br>"+
+					"<button value='blacklist'  onclick=\"post('"+id+"',this.value)\">Black-list</button> <button value='whitelist'  onclick=\"post('"+id+"',this.value)\">White-list</button>"+
+				"</div>"+
 				"<hr>"+
-			"</form>"
+			"</div>"
 		);
 	}
 }

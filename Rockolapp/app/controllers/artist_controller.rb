@@ -35,6 +35,6 @@ class ArtistController < ApplicationController
 	end
 	private
 	def artist_params
-		params.permit(:name, :uri, :spotify_id)
+		params.permit(:name, :uri, :spotify_id,:list)
 	end
 end

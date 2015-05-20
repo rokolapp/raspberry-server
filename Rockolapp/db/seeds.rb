@@ -8,4 +8,4 @@
 
 Admin.create(name: 'a', email: 'a', password: 'a')
 Superuser.create(name: 'a', email: 'a', password: 'a')
-Genre.create(name: 'Rock', mode:'whitelist')
+Genre.create(name: 'Rock', list:'whitelist')

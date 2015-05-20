@@ -55,12 +55,12 @@ class GenreController < ApplicationController
 			render 'errors/no_record'		
 	end
 
-	def read_mode(mode)
-		if mode == "whitelist"
+	def read_mode(list)
+		if list == "whitelist"
 			return "White-list"
-		elsif mode == "blacklist"
+		elsif list == "blacklist"
 			return "Black-list"
-		elsif mode == "freeforall"
+		elsif list == "freeforall"
 			return "Free-for-all"
 		end
 	end
@@ -68,7 +68,7 @@ class GenreController < ApplicationController
 
 	private
 	def genre_params
-		params.require(:genre).permit(:name, :mode)
+		params.require(:genre).permit(:name, :list)
 	end
 
 	def is_logged?

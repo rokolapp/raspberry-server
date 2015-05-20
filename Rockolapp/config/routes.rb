@@ -2,8 +2,7 @@ Rails.application.routes.draw do
 
   root 'index#index'
 
-  resources :admin, :superuser, :genre, :track, :album
-  resources :artist, param: :spotify_id
+  resources :admin, :superuser, :genre, :artist ,:track, :album
 
   get '/login' => 'sessions#login', as: 'login'
   post '/login' => 'sessions#loging'

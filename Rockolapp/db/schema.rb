@@ -25,15 +25,19 @@ ActiveRecord::Schema.define(version: 20150420015156) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name", null: false
-    t.string "mode",null: false
+    t.string "list",null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-  add_index "genres", ["name"], name: "index_genres_on_name", unique: true
+  add_index "genres", ["name","list"], name: "index_genres", unique: true
  
   create_table "albums", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name", null: false
+    t.string   "uri", null: false
+    t.string "list",null: false
+    t.string   "spotify_id", nul: false
   end
 
   create_table "artists", force: :cascade do |t|
@@ -41,16 +45,18 @@ ActiveRecord::Schema.define(version: 20150420015156) do
     t.datetime "updated_at", null: false
     t.string   "name", null: false
     t.string   "uri", null: false
+    t.string    "list",null: false
     t.string   "spotify_id", nul: false
   end
-  add_index "artists", ["spotify_id"], name: "index_artist_on_spotify_id", unique: true
+  add_index "artists", ["spotify_id","list"], name: "index_artist", unique: true
 
   create_table "tracks", force: :cascade do |t|
-    t.string   "name", null: false
-    t.string   "uri", null: false
-    t.string   "spotify_id", nul: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "name", null: false
+    t.string   "uri", null: false
+    t.string "list",null: false
+    t.string   "spotify_id", nul: false
   end
 
   create_table "superusers", force: :cascade do |t|

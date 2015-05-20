@@ -1,6 +1,12 @@
 class Artist < ActiveRecord::Base
-	validates :spotify_id, presence:true, uniqueness: {message: ": Este artista ya se ha registrado"}
-	def to_param
-		spotify_id
+	validates :spotify_id, uniqueness: {scope: :list, message: " : Este artista ya se ha registrado en la lista"}
+	before_save :val_enums
+
+	private
+	def val_enums
+		unless self.list == "whitelist" or self.list == "blacklist"
+			errors.add(:list, "Solo puede seleccionar uno de estos tipos de listas: White-list o Black-list")
+			return false
+		end
 	end
 end

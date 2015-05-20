@@ -1,7 +1,7 @@
 class Genre < ActiveRecord::Base
 
 	before_save :search_genre, :PUTO_NEGRO_DE_MIERDA
-
+	validates :name, uniqueness: {scope: :list, message: ": Ya se ha registrado este género en la lista "}
 	private
 	def search_genre
 		path = File.join(Rails.public_path,'Genres.txt')
@@ -18,8 +18,8 @@ class Genre < ActiveRecord::Base
 	end
 
 	def PUTO_NEGRO_DE_MIERDA
-		unless self.mode == "whitelist" or self.mode == "blacklist"
-			errors.add(:mode, "Solo puede seleccionar uno de estos tipos de listas: White-list o Black-list")
+		unless self.list == "whitelist" or self.list == "blacklist"
+			errors.add(:list, "Solo puede seleccionar uno de estos tipos de listas: White-list o Black-list")
 			return false
 		end
 	end
