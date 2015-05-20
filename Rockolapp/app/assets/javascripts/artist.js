@@ -1,5 +1,4 @@
 function post(id,list){
-	console.log(id);
 	token = $('#'+id+"_token").val();
 	name = $('#'+id+"_name").val();
 	uri = $('#'+id+"_uri").val();
@@ -76,7 +75,28 @@ function create_forms (data){
 		);
 	}
 }
+function searchArtist(criteria){
 
+	name = $("#index_artist_name").val();
+	id = $("#index_artist_spotify_id").val();
+	list = $("#index_artist_list").val();
+
+	$.ajax({
+		type: 'GET',
+		url: '/search_artist',
+		data: {
+			criteria: criteria,
+			name: name,
+			spotify_id: id,
+			list: list
+		}
+	}).done(function(data){
+		alert(data[0].id)
+	}).fail(function(xhr, status, error){
+		alert(xhr.getResponseHeader('errors'));
+	});
+
+}
 $(document).ready(function(){
 	$('#search_artists_btn').click(function(){
 		spotify_query('search_artists_txt','5','artist',function(data){
@@ -84,5 +104,11 @@ $(document).ready(function(){
 		});
 		}
 	);
-	$('#')
+	$('#search_artists_txt').keyup(function (e) {
+	    if (e.keyCode == 13) {
+			spotify_query('search_artists_txt','5','artist',function(data){
+				create_forms(data);
+			});
+	    }
+	});
 });

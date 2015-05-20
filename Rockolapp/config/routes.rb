@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#login', as: 'login'
   post '/login' => 'sessions#loging'
   get '/logout' => 'sessions#logout'
-  get '/searchGenre' => 'artist#search_artist'
+  get '/search_artist' => 'artist#search_artist'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

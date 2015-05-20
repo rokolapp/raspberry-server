@@ -3,7 +3,20 @@ class ArtistController < ApplicationController
 
 	end
 	def search_artist 
+		criteria = params[:criteria]
 
+		case criteria
+		when 'name'
+			@artists = Artist.where(name: params[:name], list: params[:list])
+			render json: @artists
+		when 'spotify_id'
+			@artists = Artist.where(spotify_id: params[:spotify_id], list: params[:list])
+			render json: @artists
+		else
+			response.status = 404
+			response.header['errors'] = 'Criterio de búsqueda incorrecto'
+			render nothing: true
+		end
 	end
 	def new
 		@artist = Artist.new if is_logged?
