@@ -7,10 +7,10 @@ class ArtistController < ApplicationController
 
 		case criteria
 		when 'name'
-			@artists = Artist.where(name: params[:name], list: params[:list])
+			@artists = Artist.where("name like? ", "#{params[:name]}%")
 			render json: @artists
 		when 'spotify_id'
-			@artists = Artist.where(spotify_id: params[:spotify_id], list: params[:list])
+			@artists = Artist.where(spotify_id: params[:spotify_id])
 			render json: @artists
 		else
 			response.status = 404
@@ -39,6 +39,16 @@ class ArtistController < ApplicationController
 			end
 		end
 	end
+	def destroy
+		@artist = Artist.find(params[:id])
+		if session[:admin] or session[:superuser] and @artist.destroy
+			redirect_to '/artist'
+		else
+			render 'errors/fatal_error'
+		end
+		rescue ActiveRecord::RecordNotFound
+			render 'errors/no_record'		
+	end	
 	def is_logged?
 		if session[:admin] or session[:superuser]
 			return true

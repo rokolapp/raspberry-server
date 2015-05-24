@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
 	def login_superuser(params)
 		if @superuser = Superuser.login(params) 
 			session[:superuser] = @superuser.id
-			redirect_to index
+			redirect_to root_path
 		else
 			flash[:notice] = 'Nombre de usuario o contraseña incorrecta'
 			redirect_to '/login'

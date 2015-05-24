@@ -9,5 +9,5 @@ function spotify_query(inputName,limit,type,callback){
 		dataType: 'JSON'
 	})
 	.done(function(data){callback(data)})
-	.error(function(){console.log('ERROR')});
+	.error(function(data){callback(data)});
 };

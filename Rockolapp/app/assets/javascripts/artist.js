@@ -1,3 +1,15 @@
+function readList(list){
+	switch(list){
+		case 'blacklist':
+			return 'Black-list'
+			break;
+		case 'whitelist':
+			return 'White-list'
+			break;
+		default:
+			return 'ERROR "Favor de registrar de nuevo"'
+	}
+}
 function post(id,list){
 	token = $('#'+id+"_token").val();
 	name = $('#'+id+"_name").val();
@@ -79,7 +91,7 @@ function searchArtist(criteria){
 
 	name = $("#index_artist_name").val();
 	id = $("#index_artist_spotify_id").val();
-	list = $("#index_artist_list").val();
+	artistsField = $('#artists_index_field');
 
 	$.ajax({
 		type: 'GET',
@@ -88,10 +100,37 @@ function searchArtist(criteria){
 			criteria: criteria,
 			name: name,
 			spotify_id: id,
-			list: list
 		}
 	}).done(function(data){
-		alert(data[0].id)
+		artistsField.html('');
+		if(data.length > 0){
+			for(var i = 0; i < data.length; i++){
+
+				name = data[i].name;
+				uri = data[i].uri;
+				list = data[i].list;
+
+				artistsField.append(
+					"<hr>"+
+					"<div>"+
+						"<label>Nombre:</label>"+
+						"<p>"+name+"</p>"+
+					"</div>"+
+					"<div>"+
+						"<label>URI:</label>"+
+						"<p>"+uri+"</p>"+
+					"</div>"+
+					"<div>"+
+						"<label>Lista:</label>"+
+						"<p>"+readList(list)+"</p>"+
+					"</div>"+
+					"<a data-confirm=\"Rlly m8?\" rel=\"nofollow\" data-method=\"delete\" href=\"artist/"+data[i].id+"\">Delete</a>"+
+					"<hr>"
+				);
+			}
+		}else{
+			artistsField.html('<H1>No se encontraron resultados</>');
+		}
 	}).fail(function(xhr, status, error){
 		alert(xhr.getResponseHeader('errors'));
 	});
