@@ -54,6 +54,10 @@ function create_forms (data){
 		}
 		uri = artists[i].uri;
 		id = artists[i].id
+		genres='';
+		for (var j = 0; j < artists[j].genres;){
+			genres += genre + ",";
+		}
 		autToken = $('#authenticity_tokens').val();
 		artistsForms.append(
 			"<hr>"+
@@ -82,6 +86,7 @@ function create_forms (data){
 					"<label>Lista:</label><br>"+
 					"<button value='blacklist'  onclick=\"post('"+id+"',this.value)\">Black-list</button> <button value='whitelist'  onclick=\"post('"+id+"',this.value)\">White-list</button>"+
 				"</div>"+
+				"<input type='hidden' id='"+id+"_genres' value='"+genres+"'>"+
 				"<hr>"+
 			"</div>"
 		);

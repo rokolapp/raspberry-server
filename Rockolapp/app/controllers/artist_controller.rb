@@ -58,6 +58,10 @@ class ArtistController < ApplicationController
 	end
 	private
 	def artist_params
-		params.permit(:name, :uri, :spotify_id,:list)
+		params.permit(:name, :uri, :spotify_id,:list,:genres)
+	end
+	def vals_genre(genres,list)
+		
+		Genre.find()
 	end
 end
