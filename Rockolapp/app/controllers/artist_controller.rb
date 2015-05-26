@@ -22,7 +22,10 @@ class ArtistController < ApplicationController
 		@artist = Artist.new if is_logged?
 	end
 	def create
-		if is_logged? 
+
+		genres = params[:genres].split(',')
+
+		if is_logged? and vals_genres(genres, params[:list])
 			@artist = Artist.new(artist_params)
 			if @artist.save 
 				render :nothing => true, :status => 200
@@ -37,6 +40,8 @@ class ArtistController < ApplicationController
 				response.header['errors'] = errors
 				render nothing: true
 			end
+		else
+			return
 		end
 	end
 	def destroy
@@ -58,10 +63,16 @@ class ArtistController < ApplicationController
 	end
 	private
 	def artist_params
-		params.permit(:name, :uri, :spotify_id,:list,:genres)
+		params.permit(:name, :uri, :spotify_id,:list)
 	end
-	def vals_genre(genres,list)
-		
-		Genre.find()
+	def vals_genres(genres,list)
+		genres.each do |genre| 
+			if Genre.exists?(name: genre.capitalize,list: list)
+				response.status = 404
+				response.header['errors'] = "Este artista pertenece al genero: \'#{genre.capitalize}\', no es necesario registrarlo."
+				render nothing: true
+				return false
+			end
+		end
 	end
 end

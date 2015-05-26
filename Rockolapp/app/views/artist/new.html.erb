@@ -1,3 +1,4 @@
+<%= javascript_include_tag "artist", params[:controller] %>
 <% if @artist.errors.any? %>
 	<h1>Se encontraron los siguientes errores al registrar su artista:</h1>
 	<% @artist.errors.full_messages.each do |e| %>

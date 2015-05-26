@@ -17,10 +17,10 @@ function post(id,list){
 	sId = $('#'+id+"_id").val();
 	lista = list;
 	genres = $('#'+id+'_genres').val();
-	if(confirm('¿Desea registrar el artista?')){
+	if(confirm('¿Desea registrar el album?')){
 		$.ajax({
 			type: 'POST',
-			url: '/artist',
+			url: '/album',
 			data: {
 				token: token,
 				name: name,
@@ -37,32 +37,31 @@ function post(id,list){
 	}
 	else{}
 }
-function create_forms (data){
-	artistsForms = $('#artists_forms');
-	artistsForms.html('');
-	artists = data.artists.items;
-	if(artists.length == 0){
-		artistsForms.append('<h1>No se encontraron coincidencias</h1>');
+function create_forms(data){
+	albumsForms = $('#albums_forms');
+	albumsForms.html('');
+	albums = data.albums.items;
+	if(albums.length == 0){
+		albumsForms.append('<h1>No se encontraron coincidencias</h1>');
 		return;
 	}
-	for(var i = 0; i < artists.length; i++){
+	for(var i = 0; i < albums.length; i++){
 
-		name = artists[i].name;
-		if(artists[i].images.length != 0){
-			image = artists[i].images[0].url;
+		name = albums[i].name;
+		if(albums[i].images.length != 0){
+			image = albums[i].images[0].url;
 		}
 		else{
 			image = '/no_image.png'
 		}
-		uri = artists[i].uri;
-		id = artists[i].id
-		genres = artists[i].genres.join(',');
+		uri = albums[i].uri;
+		id = albums[i].id
 		autToken = $('#authenticity_tokens').val();
-		artistsForms.append(
+		albumsForms.append(
 			"<hr>"+
-			"<div class='artist_forms' id='artist_form_for_"+id+"'>"+
+			"<div class='album_forms' id='album_form_for_"+id+"'>"+
 			"<input type='hidden' id='"+id+"_token'name='authenticity_token' value='"+autToken+"'>"+
-				"<div class='artist_image'>"+
+				"<div class='album_image'>"+
 					"<label>Imágen:</label><br>"+
 					"<img src='"+image+"' width='100' height='200'>"+
 				"</div>"+
@@ -85,28 +84,27 @@ function create_forms (data){
 					"<label>Lista:</label><br>"+
 					"<button value='blacklist'  onclick=\"post('"+id+"',this.value)\">Black-list</button> <button value='whitelist'  onclick=\"post('"+id+"',this.value)\">White-list</button>"+
 				"</div>"+
-				"<input type='hidden' id='"+id+"_genres' value='"+genres+"'>"+
 				"<hr>"+
 			"</div>"
 		);
 	}
 }
-function searchArtist(criteria){
+function searchAlbum(criteria){
 
-	name = $("#index_artist_name").val();
-	id = $("#index_artist_spotify_id").val();
-	artistsField = $('#artists_index_field');
+	name = $("#index_album_name").val();
+	id = $("#index_album_spotify_id").val();
+	albumsField = $('#albums_index_field');
 
 	$.ajax({
 		type: 'GET',
-		url: '/search_artist',
+		url: '/search_album',
 		data: {
 			criteria: criteria,
 			name: name,
 			spotify_id: id,
 		}
 	}).done(function(data){
-		artistsField.html('');
+		albumsField.html('');
 		if(data.length > 0){
 			for(var i = 0; i < data.length; i++){
 
@@ -114,7 +112,7 @@ function searchArtist(criteria){
 				uri = data[i].uri;
 				list = data[i].list;
 
-				artistsField.append(
+				albumsField.append(
 					"<hr>"+
 					"<div>"+
 						"<label>Nombre:</label>"+
@@ -128,12 +126,12 @@ function searchArtist(criteria){
 						"<label>Lista:</label>"+
 						"<p>"+readList(list)+"</p>"+
 					"</div>"+
-					"<a data-confirm=\"Rlly m8?\" rel=\"nofollow\" data-method=\"delete\" href=\"artist/"+data[i].id+"\">Delete</a>"+
+					"<a data-confirm=\"Rlly m8?\" rel=\"nofollow\" data-method=\"delete\" href=\"album/"+data[i].id+"\">Delete</a>"+
 					"<hr>"
 				);
 			}
 		}else{
-			artistsField.html('<H1>No se encontraron resultados</>');
+			albumsField.html('<H1>No se encontraron resultados</>');
 		}
 	}).fail(function(xhr, status, error){
 		alert(xhr.getResponseHeader('errors'));
@@ -141,15 +139,15 @@ function searchArtist(criteria){
 
 }
 $(document).ready(function(){
-	$('#search_artists_btn').click(function(){
-		spotify_query('search_artists_txt','5','artist',function(data){
+	$('#search_albums_btn').click(function(){
+		spotify_query('search_albums_txt','5','album',function(data){
 			create_forms(data);
 		});
 		}
 	);
-	$('#search_artists_txt').keyup(function (e) {
+	$('#search_albums_txt').keyup(function (e) {
 	    if (e.keyCode == 13) {
-			spotify_query('search_artists_txt','5','artist',function(data){
+			spotify_query('search_albums_txt','5','album',function(data){
 				create_forms(data);
 			});
 	    }

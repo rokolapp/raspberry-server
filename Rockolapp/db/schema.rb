@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150420015156) do
     t.string "list",null: false
     t.string   "spotify_id", nul: false
   end
+  add_index "albums", ["spotify_id","list"], name: "index_album", unique: true
 
   create_table "artists", force: :cascade do |t|
     t.datetime "created_at", null: false
