@@ -16,18 +16,16 @@ function post(id,list){
 	uri = $('#'+id+"_uri").val();
 	sId = $('#'+id+"_id").val();
 	lista = list;
-	genres = $('#'+id+'_genres').val();
-	if(confirm('¿Desea registrar el album?')){
+	if(confirm('¿Desea registrar la cancion?')){
 		$.ajax({
 			type: 'POST',
-			url: '/album',
+			url: '/track',
 			data: {
 				token: token,
 				name: name,
 				uri: uri,
 				spotify_id: sId,
 				list: lista,
-				genres : genres
 			}
 		}).done(function(){
 			alert('Registro exitoso')
@@ -38,30 +36,30 @@ function post(id,list){
 	else{}
 }
 function create_forms(data){
-	albumsForms = $('#albums_forms');
-	albumsForms.html('');
-	albums = data.albums.items;
-	if(albums.length == 0){
-		albumsForms.append('<h1>No se encontraron coincidencias</h1>');
+	tracksForms = $('#tracks_forms');
+	tracksForms.html('');
+	tracks = data.tracks.items;
+	if(tracks.length == 0){
+		tracksForms.append('<h1>No se encontraron coincidencias</h1>');
 		return;
 	}
-	for(var i = 0; i < albums.length; i++){
+	for(var i = 0; i < tracks.length; i++){
 
-		name = albums[i].name;
-		if(albums[i].images.length != 0){
-			image = albums[i].images[0].url;
+		name = tracks[i].name;
+		if(tracks[i].album.images.length != 0){
+			image = tracks[i].album.images[0].url;
 		}
 		else{
 			image = '/no_image.png'
 		}
-		uri = albums[i].uri;
-		id = albums[i].id
+		uri = tracks[i].uri;
+		id = tracks[i].id
 		autToken = $('#authenticity_tokens').val();
-		albumsForms.append(
+		tracksForms.append(
 			"<hr>"+
-			"<div class='album_forms' id='album_form_for_"+id+"'>"+
+			"<div class='track_forms' id='track_form_for_"+id+"'>"+
 			"<input type='hidden' id='"+id+"_token'name='authenticity_token' value='"+autToken+"'>"+
-				"<div class='album_image'>"+
+				"<div class='track_image'>"+
 					"<label>Imágen:</label><br>"+
 					"<img src='"+image+"' width='100' height='200'>"+
 				"</div>"+
@@ -91,20 +89,20 @@ function create_forms(data){
 }
 function searchAlbum(criteria){
 
-	name = $("#index_album_name").val();
-	id = $("#index_album_spotify_id").val();
-	albumsField = $('#albums_index_field');
+	name = $("#index_track_name").val();
+	id = $("#index_track_spotify_id").val();
+	tracksField = $('#tracks_index_field');
 
 	$.ajax({
 		type: 'GET',
-		url: '/search_album',
+		url: '/search_track',
 		data: {
 			criteria: criteria,
 			name: name,
 			spotify_id: id,
 		}
 	}).done(function(data){
-		albumsField.html('');
+		tracksField.html('');
 		if(data.length > 0){
 			for(var i = 0; i < data.length; i++){
 
@@ -112,7 +110,7 @@ function searchAlbum(criteria){
 				uri = data[i].uri;
 				list = data[i].list;
 
-				albumsField.append(
+				tracksField.append(
 					"<hr>"+
 					"<div>"+
 						"<label>Nombre:</label>"+
@@ -126,12 +124,12 @@ function searchAlbum(criteria){
 						"<label>Lista:</label>"+
 						"<p>"+readList(list)+"</p>"+
 					"</div>"+
-					"<a data-confirm=\"Rlly m8?\" rel=\"nofollow\" data-method=\"delete\" href=\"album/"+data[i].id+"\">Delete</a>"+
+					"<a data-confirm=\"Rlly m8?\" rel=\"nofollow\" data-method=\"delete\" href=\"track/"+data[i].id+"\">Delete</a>"+
 					"<hr>"
 				);
 			}
 		}else{
-			albumsField.html('<H1>No se encontraron resultados</>');
+			tracksField.html('<H1>No se encontraron resultados</>');
 		}
 	}).fail(function(xhr, status, error){
 		alert(xhr.getResponseHeader('errors'));
@@ -139,15 +137,15 @@ function searchAlbum(criteria){
 
 }
 $(document).ready(function(){
-	$('#search_albums_btn').click(function(){
-		spotify_query('search_albums_txt','15','album',function(data){
+	$('#search_tracks_btn').click(function(){
+		spotify_query('search_tracks_txt','15','track',function(data){
 			create_forms(data);
 		});
 		}
 	);
-	$('#search_albums_txt').keyup(function (e) {
+	$('#search_tracks_txt').keyup(function (e) {
 	    if (e.keyCode == 13) {
-			spotify_query('search_albums_txt','15','album',function(data){
+			spotify_query('search_tracks_txt','15','track',function(data){
 				create_forms(data);
 			});
 	    }

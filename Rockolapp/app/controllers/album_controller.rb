@@ -1,3 +1,4 @@
+require 'net/http'
 class AlbumController < ApplicationController
 def index
 
@@ -24,7 +25,7 @@ end
 def create
 	if is_logged? 
 		@album = Album.new(album_params)
-		if @album.save 
+		if  vals_redundance(valids_params) and @album.save
 			render :nothing => true, :status => 200
 		else
 			if @album.errors.any?
@@ -33,8 +34,8 @@ def create
  					errors += (e + "\n")
 				end
 			end 
-			response.status = 418
-			response.header['errors'] = errors
+			response.status = 404
+			response.header['errors'] += "#{errors}\n"
 			render nothing: true
 		end
 	else
@@ -61,5 +62,43 @@ end
 private
 	def album_params
 		params.permit(:name, :uri, :spotify_id,:list)
+	end
+	def valids_params 
+		params.permit(:spotify_id, :list)
+	end
+	def vals_redundance(params)
+
+		uri = URI.parse("https://api.spotify.com/v1/albums/#{params[:spotify_id]}")
+		http = Net::HTTP.new(uri.host, uri.port)
+		http.use_ssl = true
+		http.verify_mode = OpenSSL::SSL::VERIFY_NONE 
+		res = http.get(uri.request_uri)
+		json = JSON.parse(res.body)
+		if val_genres(json['genres'], params[:list]) and val_artists(json['artists'], params[:list])
+			return true
+		else
+			return false
+		end
+
+	end
+	def val_genres(genres, list)
+		genres.each{ |genre|
+			if Genre.exists?(name: genre.capitalize,list: list)
+				response.status = 404
+				response.header['errors'] = "Este album pertenece al genero: \'#{genre.capitalize}\', no es necesario registrarlo.\n"
+				return false
+			end
+		}
+		return true
+	end
+	def val_artists(artists, list)
+		artists.each{ |artist|
+			if Artist.exists?(spotify_id: artist['id'],list: list)
+				response.status = 404
+				response.header['errors'] = "Este album pertenece al artista: \'#{artist['name'].capitalize}\', no es necesario registrarlo."
+				return false
+			end
+		}
+		return true
 	end
 end

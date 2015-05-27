@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#loging'
   get '/logout' => 'sessions#logout'
   get '/search_artist' => 'artist#search_artist'
-  get '/search_album' => 'artist#search_album'
+  get '/search_album' => 'album#search_album'
+  get '/search_track' => 'track#search_track'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

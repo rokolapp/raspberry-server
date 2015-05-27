@@ -142,14 +142,14 @@ function searchArtist(criteria){
 }
 $(document).ready(function(){
 	$('#search_artists_btn').click(function(){
-		spotify_query('search_artists_txt','5','artist',function(data){
+		spotify_query('search_artists_txt','15','artist',function(data){
 			create_forms(data);
 		});
 		}
 	);
 	$('#search_artists_txt').keyup(function (e) {
 	    if (e.keyCode == 13) {
-			spotify_query('search_artists_txt','5','artist',function(data){
+			spotify_query('search_artists_txt','15','artist',function(data){
 				create_forms(data);
 			});
 	    }
