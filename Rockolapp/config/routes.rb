@@ -2,14 +2,34 @@ Rails.application.routes.draw do
 
   root 'index#index'
 
-  resources :admin, :superuser, :genre, :artist ,:track, :album
+  resources :admin, 
+  :superuser, 
+  :genre, 
+  :artist,
+  :track, 
+  :album
 
+  #Login routes
   get '/login' => 'sessions#login', as: 'login'
   post '/login' => 'sessions#loging'
   get '/logout' => 'sessions#logout'
+
+  #Searching routes
   get '/search_artist' => 'artist#search_artist'
   get '/search_album' => 'album#search_album'
   get '/search_track' => 'track#search_track'
+
+  #Lists routes
+  get '/lists/admin' => 'lists#admin'
+  post '/lists/admin' => 'lists#save'
+  get '/lists/see' => 'lists#see'
+
+  #Playlist routes
+  get '/playlist/new' => 'playlist#new'
+  post '/playlist/new' => 'playlist#save'
+  get 'playlist/search' => 'playlist#search'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

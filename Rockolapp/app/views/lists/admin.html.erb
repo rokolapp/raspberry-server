@@ -1,0 +1,9 @@
+<h1>Cambie el modo de lista a:</h1>
+<%= form_tag("/lists/admin", method: "post") do %>
+	<p>
+		<%= select_tag :list, options_for_select([['White-list', 'whitelist'], ['Black-list', 'blacklist'],['Free-for-all', 'freeforall']]) %>
+  	</p>
+  	<p>
+  		<%= submit_tag("Cambiar") %>
+  	</p>	
+<% end %>
