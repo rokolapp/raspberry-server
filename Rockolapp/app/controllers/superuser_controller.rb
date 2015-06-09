@@ -1,0 +1,3 @@
+class SuperuserController < ApplicationController
+
+end

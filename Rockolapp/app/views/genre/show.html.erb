@@ -1,0 +1,12 @@
+<h2>Nombre del Género:</h2>
+<p>
+	<%= @genre.name %> 
+</p>
+<h2>Modo:</h2>
+<p>
+	<%= read_mode @genre.list %>
+</p>
+<p>
+	<%= link_to 'Edit', "#{@genre.id}/edit" %>
+	<%= link_to 'Delete', "#{@genre.id}", method: 'delete', data:{confirm: 'Rlly m8?'} %>
+</p>

@@ -1,0 +1,24 @@
+<h1>Géneros</h1>
+<% unless @genres.blank? %>
+	<% @genres.each do |f| %>
+		<p>
+			<h2>Nombre:</h2>
+			<br>
+			<%= f.name %>
+		</p>
+		<p>
+			<h2>Modo:</h2>
+			<br>
+			<%= f.list %>
+		</p>
+		<p>
+			<%= link_to 'Edit', "genre/#{f.id}/edit" %>
+			<%= link_to 'Delete', "genre/#{f.id}", method: 'delete', data:{confirm: 'Rlly m8?'} %>
+		</p>
+		<hr>
+	<%end%>
+<% else %>
+	<h3>No hay nuevos géneros registrados por el momento, pero puedes registrarlos aquí: </h3>
+	<% @genre = Genre.new%>
+	<%= render template: 'genre/new' %>
+<%end%>

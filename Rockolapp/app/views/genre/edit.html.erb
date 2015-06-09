@@ -1,0 +1,22 @@
+<% if @genre.errors.any? %>
+	<h1>Se encontraron los siguientes errores al registrar un nuevo género:</h1>
+	<% @genre.errors.full_messages.each do |e| %>
+	<li><%= e %></li>
+	<% end %>
+<% end %>
+<%= form_for :genre, url: "/genre/#{@genre.id}", method: :PUT do |f| %>
+	<h1>Nuevo Género</h1>
+	<p>
+		<%= f.label :name %>
+		<br>
+		<%= f.text_field :name, value: @genre.name %>
+	</p>
+	<p>
+		<%= f.label :list %>
+		<br>
+		<%= f.select :list, options_for_select([['White-list', 'whitelist'], ['Black-list', 'blacklist'], ['Free-for-all', 'freeforall']]), value: @genre.list %>
+	</p>
+	<p>
+		<%= f.submit(value: 'Actualizar') %>
+	</p>
+<% end %>

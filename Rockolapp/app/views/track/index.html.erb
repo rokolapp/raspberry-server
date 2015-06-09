@@ -1,0 +1,29 @@
+<%= javascript_include_tag "track", params[:controller] %>
+<h1>Busca las canciones</h1>
+<div>
+	<div>
+		<h2>Buscar por Spotify Id</h2>
+		<p>
+			Id:
+			<br>
+			<input id='index_track_spotify_id'>
+		</p>
+		<p>
+			<button id='index_search_track' onclick='searchAlbum("spotify_id")'>Buscar</button>
+		</p>
+	</div>
+	<div>
+		<h2>Buscar por Nombre</h2>
+		<p>
+			Nombre:
+			<br>
+			<input id='index_track_name'>
+		</p>
+		<p>
+			<button id='index_search_track' onclick='searchAlbum("name")'>Buscar</button>
+		</p>
+	</div>
+</div>
+<div id='tracks_index_field'>
+
+</div>
