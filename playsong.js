@@ -1,10 +1,6 @@
-var http 	= require('http'),
-	url 	= require('url'),
-	lame 	= require('lame'),
-	Speaker = require('speaker'),
-	Spotify = require('spotify-web');
 
-/*----------------SERVER CONFIG----------------*/ 
+
+/*----------------SERVER CONFIG---------------- 
 const PORT = 8080;
 var server = http.createServer(handleRequest);
 
@@ -12,7 +8,7 @@ server.listen(PORT, function(){
 	console.log('Servidor encendido');
 });
 
-/*----------------SERVER Controller----------------*/
+/*----------------SERVER Controller----------------
 var playlist = [];
 
 function handleRequest(req, res){
@@ -43,7 +39,40 @@ function handleRequest(req, res){
 		res.end('Playing song');
 	}
 }
+*/
+var http 	= require('http'),
+	url 	= require('url'),
+	lame 	= require('lame'),
+	Speaker = require('speaker'),
+	Spotify = require('spotify-web');
+	firebase = require('firebase')
 
+var playlist = [];
+var old_songs = []
+
+var ref = new firebase("https://rockolapp.firebaseio.com");
+
+ref.on("child_added", function(snapshot, prevChildKey) {
+	var track_uri = snapshot.val().track_uri
+	console.log('##')
+	console.log(prevChildKey)
+	playlist.push(track_uri);
+	old_songs.push(prevChildKey)
+
+	if (playlist.length == 1)
+		playsong()
+
+  
+});
+
+function delete_song(prevChildKey){
+	console.log('remove')
+	console.log(prevChildKey)
+	if(prevChildKey != null){
+		child_ref = new firebase("https://rockolapp.firebaseio.com/"+prevChildKey)
+		child_ref.remove();
+	}
+}
 
 function playsong ()
 {
@@ -51,6 +80,8 @@ function playsong ()
 
 	var username = '12156614669',
 		password = 'Getinhalo4';
+
+
 
 	Spotify.login(username,password, function(err,spotify){
 		if (err) throw err;
@@ -60,15 +91,16 @@ function playsong ()
 		spotify.get(url, function(err,track){
 			if (err) throw err;
 			console.log('Playing %s - %s', track.artist[0].name, track.name);
-			
-			//play() return a readable stream of mp3 audio data
+			delete_song(old_songs[0])
+			//play() return a readable stream of mp3 audio data			
 			track.play()
 			.pipe(new lame.Decoder())
 			.pipe(new Speaker())
 			.on('finish', function(){
 				spotify.disconnect();
 				console.log('end song')
-				playlist.shift();				
+				playlist.shift();	
+				old_songs.shift();			
 				if(playlist.length > 0)
 					playsong();
 			});

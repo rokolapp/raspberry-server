@@ -6,10 +6,10 @@
     "start": "playsong.js"
   },
   "dependencies": {
+    "firebase": "^2.2.7",
     "lame": "*",
     "protobuf": "*",
     "speaker": "*",
-    "spotify-web": "*",
-    "url": "^0.10.3"
+    "spotify-web": "*"
   }
 }
