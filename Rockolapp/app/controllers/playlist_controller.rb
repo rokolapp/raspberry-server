@@ -1,12 +1,32 @@
 require 'net/http'
 require 'uri'
 class PlaylistController < ApplicationController
-
+	def index
+		@playlists = Playlist.all
+	end
 	def new
 		req_ip = request.remote_ip
 		songs = Playlist.all
 		songs.each{|song| redirect_to '/playlist' if req_ip == song.ip}
 	end
+	def save
+		req_ip = request.remote_ip
+		songs = Playlist.all
+		songs.each do |song| 
+			if req_ip == song.ip
+				redirect_to '/playlist' 
+				return
+			end
+		end
+		attrs = playlist_params
+		attrs[:ip] = req_ip
+		@playlist = Playlist.new(attrs)
+		if @playlist.save
+			redirect_to '/playlist'
+		else
+			redirect_to '/playlist/new'
+		end
+	end	
 	def search
 		q = params[:q]
 		limit = params[:limit]
@@ -68,13 +88,10 @@ class PlaylistController < ApplicationController
 			render json: json.to_json
 		else
 			render json: '{error: "Hubo problemas"}'
-		end
-		
+		end	
 	end
-	def save
-		puts "\n\n LA IP ES ESTA WEY: #{request.remote_ip} \n\n"
-		redirect_to '/playlist/new'
+	private
+	def playlist_params
+		params.permit(:name, :uri, :id, :img_src)
 	end
-
-
 end

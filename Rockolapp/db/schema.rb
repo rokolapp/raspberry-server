@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20150609162928) do
     t.string   "ip",         null: false
     t.string   "name",       null: false
     t.string   "uri",        null: false
+    t.string   "img_src"     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
