@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
 	end
 	private
 	def on_session?
-		if session[:admin] or [:superuser]
+		if session[:admin] or session[:superuser]
 			return false
 		else
 			return true
