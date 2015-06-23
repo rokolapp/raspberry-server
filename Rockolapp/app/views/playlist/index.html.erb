@@ -1,0 +1,22 @@
+<h1>Playlist</h1>
+<% unless @playlists.blank? %>
+	<% @playlists.each do |f| %>
+		<p>
+			<h2>Nombre:</h2>
+			<br>
+			<%= f.name %>
+		</p>
+		<p>
+			<h2>Uri:</h2>
+			<br>
+			<%= read_mode f.uri %>
+		</p>
+		<p>
+			<%= link_to 'Delete', "genre/#{f.id}", method: 'delete', data:{confirm: 'Rlly m8?'} %>
+		</p>
+		<hr>
+	<%end%>
+<% else %>
+	<h3>No hay nuevas canciones registrados por el momento, pero puedes registrarlos aquí: </h3>
+	<a href="/playlist/new">Nueva canción</a>
+<%end%>

@@ -1,0 +1,14 @@
+<%= javascript_include_tag "album", params[:controller] %>
+<% if @album.errors.any? %>
+	<h1>Se encontraron los siguientes errores al registrar su album:</h1>
+	<% @album.errors.full_messages.each do |e| %>
+	<li><%= e %></li>
+	<% end %>
+<% end %>
+<h1>Nuevo Album</h1>
+<input id='search_albums_txt'>
+<input type='submit' value='Buscar' id='search_albums_btn'>
+<input type='hidden' value='<%= form_authenticity_token %>' id='authenticity_tokens'>
+<div id='albums_forms'>
+
+</div>

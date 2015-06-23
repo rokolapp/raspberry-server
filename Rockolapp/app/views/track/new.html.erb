@@ -1,0 +1,14 @@
+<%= javascript_include_tag "track", params[:controller] %>
+<% if @track.errors.any? %>
+	<h1>Se encontraron los siguientes errores al registrar su track:</h1>
+	<% @track.errors.full_messages.each do |e| %>
+	<li><%= e %></li>
+	<% end %>
+<% end %>
+<h1>Nueva Canción</h1>
+<input id='search_tracks_txt'>
+<input type='submit' value='Buscar' id='search_tracks_btn'>
+<input type='hidden' value='<%= form_authenticity_token %>' id='authenticity_tokens'>
+<div id='tracks_forms'>
+
+</div>
