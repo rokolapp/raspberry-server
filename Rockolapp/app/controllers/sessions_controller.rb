@@ -3,13 +3,15 @@ class SessionsController < ApplicationController
 	
 	end
 	def sup_login
-		
+
 	end
 	def loging
 		if user_param == 'admin'
 			login_admins login_params
 		elsif user_param == 'superuser'
 			login_superuser login_params
+		else
+			redirect_to '/login'
 		end
 	end
 
@@ -33,7 +35,7 @@ class SessionsController < ApplicationController
 	def login_admins(params)
 		if @admin = Admin.login(params) 
 			session[:admin] = @admin.id
-			redirect_to @admin
+			redirect_to "/dashboard"
 		else
 			flash[:notice] = 'Nombre de usuario o contraseña incorrecta'
 			redirect_to '/login'

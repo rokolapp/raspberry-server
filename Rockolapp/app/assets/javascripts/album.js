@@ -126,7 +126,7 @@ function searchAlbum(criteria){
 						"<label>Lista:</label>"+
 						"<p>"+readList(list)+"</p>"+
 					"</div>"+
-					"<a data-confirm=\"Rlly m8?\" rel=\"nofollow\" data-method=\"delete\" href=\"album/"+data[i].id+"\">Delete</a>"+
+					"<a data-confirm=\"Rlly m8?\" rel=\"nofollow\" data-method=\"delete\" href=\"/album/"+data[i].id+"\">Delete</a>"+
 					"<hr>"
 				);
 			}

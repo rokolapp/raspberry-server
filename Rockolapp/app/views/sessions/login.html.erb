@@ -63,13 +63,7 @@
 					<%= form_for :login, url: '/login', class: 'col s12', method: 'POST' do |f| %>
 					<div class= "row">
 						<div class="input-field col s12">
-							<p>
-								<%= f.label 'Login as:' %>
-								<br>
-								<%= radio_button_tag(:user, "Administrador") %>
-								<%= label_tag(:user_admin, "Jeje es neta")%>
-							</p>
-							<!--<input name='login[user]' type='hidden' value='admin'>-->
+							<input name='login[user]' type='hidden' value='admin'>
 						</div>
 					</div>
 					<div class="row">	

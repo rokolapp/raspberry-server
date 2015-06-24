@@ -15,8 +15,7 @@
 		<script src="/assets/init.js"></script>  
 	</head>
 	<body>
-			<nav class="teal darken-4" role="navigation">
-				
+<nav class="teal darken-4" role="navigation">
 				<ul id="buscar" class="dropdown-content">
 					<li><a href="/track/">Cancion</a></li>
 					<li class="divider"></li>
@@ -25,9 +24,9 @@
 					<li><a href="/album/">Albúm</a></li>
 					<li class="divider"></li>
 				</ul>
-
+				<!--
 				<ul id="administrar" class="dropdown-content">
-				  <li><a href="#!">Crear nueva lista</a></li>
+				  <li><a href="newlist.html">Crear nueva lista</a></li>
 				  <li class="divider"></li>
 				  <li><a href="#!">Listas</a></li>
 				  <li class="divider"></li>
@@ -35,18 +34,30 @@
 				  <li class="divider"></li>
 				  <li><a href="#!">Eliminar</a></li>
 				</ul>
-
+			    -->
 			    <div class="nav-wrapper container">
-			      <a id="logo-container" href="/" class="brand-logo">Rockolapp</a>
+			      <a id="logo-container" href="dashboard.html" class="brand-logo">Rockolapp</a>
+			      <!--
 			      <ul class="right hide-on-med-and-down">
 			        <li><a href="#">Mapa</a></li>
 			      </ul>
 			      <ul class="right hide-on-med-and-down">
 			      	<li><a href="#">Local</a></li>
 			      </ul>
+			      -->
 			      <ul class="right hide-on-med-and-down">
-			      	<li><a class="dropdown-button" data-activates="buscar">Buscar...</a></li>
+			        <li><a href="/track/new">Canción</a></li>
 			      </ul>
+			      <ul class="right hide-on-med-and-down">
+			      	<li><a href="/artist/new">Album</a></li>
+			      </ul>
+			      <ul class="right hide-on-med-and-down">
+			      	<li><a href="/album/new">Artista</a></li>
+			      </ul>
+			      <ul class="right hide-on-med-and-down">
+			      	<li><a class="dropdown-button" data-activates="buscar">Buscar... <i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+			      </ul>
+			      <!--
 			      <ul class="right hide-on-med-and-down">
 			      	<li><a class="dropdown-button" data-activates="administrar">&nbsp Administrar <i class="mdi-navigation-arrow-drop-down right"></i></a></li>
 			      </ul>
@@ -54,14 +65,16 @@
 			      <ul id="nav-mobile" class="side-nav">
 			        <li><a href="#">Navbar Link</a></li>
 			      </ul>
+			      -->
 			      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 			    </div>
-			</nav>
-		    <div id="index-banner" class="parallax-container">
+			</nav>		    <div id="index-banner" class="parallax-container">
 		    	<div class="section no-pad-bot">
 			      <div class="container">
 			        <br><br>
-			        	<h1> Busqueda de artitas </h1>
+			       	<div class="row center">
+			          <h1 class="header col s12 light" font-color="#FFF">Busqueda de artista</h5>
+			        </div>
 			        <br><br>
 			      </div>
 		    	</div>
