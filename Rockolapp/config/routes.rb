@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   #Login routes
   get '/login' => 'sessions#login', as: 'login'
+  get '/loginsup' => 'sessions#sup_login'
   post '/login' => 'sessions#loging'
   get '/logout' => 'sessions#logout'
 

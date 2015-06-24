@@ -2,6 +2,9 @@ class SessionsController < ApplicationController
 	def login
 	
 	end
+	def sup_login
+		
+	end
 	def loging
 		if user_param == 'admin'
 			login_admins login_params
