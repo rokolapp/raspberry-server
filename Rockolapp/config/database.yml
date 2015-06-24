@@ -8,9 +8,9 @@ default: &default
   adapter: postgresql
   encoding: unicode
   host: localhost
-  port: 5435
-  username: rockolapp
-  password: n0m3l0
+  port: 5432
+  username: admin 
+  password: admin 
   pool: 5
   timeout: 5000
 
