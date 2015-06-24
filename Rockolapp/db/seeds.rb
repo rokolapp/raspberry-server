@@ -7,5 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Admin.create(name: 'a', email: 'a', password: 'a')
-Superuser.create(name: 'a', email: 'a', password: 'a')
+Superuser.create(name: 'a@a.com', email: 'a', password: 'a')
 Genre.create(name: 'Rock', list:'whitelist')

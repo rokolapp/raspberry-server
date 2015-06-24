@@ -1,1 +1,69 @@
-<H1>No tienes autorización de ver esta página</h1>
+<!DOCTYPE html>
+<html>
+	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+	  	<title>Rockolapp</title>
+
+	  	<!-- CSS  -->
+	  	<link href="/assets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+	  	<!--  Scripts-->
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="/assets/materialize.js"></script>
+	</head>
+	<body>
+		<nav class="indigo darken-4" role="navigation">
+		    <div class="nav-wrapper container">
+		      <a id="logo-container" href="/" class="brand-logo">Rockolapp</a>
+		      <ul class="right hide-on-med-and-down">
+		        <li><a href="/login">Administrador</a></li>
+		      </ul>
+		      <ul class="right hide-on-med-and-down">
+		      	<li><a href="#">Cónocenos</a></li>
+		      </ul>
+		      <ul class="right hide-on-med-and-down">
+		      	<li><a href="/buy">Compra</a></li>
+		      </ul>
+		      <ul id="nav-mobile" class="side-nav">
+		        <li><a href="#">Navbar Link</a></li>
+		      </ul>
+		      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+		    </div>
+		</nav>
+
+		<div id="index-banner" class="parallax2-container">
+		    <div class="section no-pad-bot">
+		      <div class="container">
+		        <br><br>
+		        <h1 class="header center blue-text text-accent-2">No tienes autorización para ver esta página</h1>
+		        <br><br>
+		      </div>
+		    </div>
+		    <div class="parallax">
+		    	<%= image_tag "error_images/notpass.jpg", :alt => "Diviertete", :title => "background_image1"%>
+		    </div>
+		    <br>
+		    <br>
+		    <br>
+		    <br>
+		    <br>
+		    <br>
+		</div>
+		<footer class="page-footer teal">
+		    <div class="container">
+		      <div class="row">
+		        <div class="col l6 s12">
+		          <h5 class="white-text">¡Invasor!</h5>
+		          <p class="grey-text text-lighten-4">Por favor completa tu registro correctamente o inicia sesión con rockolapp, si no tienes clave ponte en contacto con soporte de cliente</p>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="footer-copyright">
+		      <div class="container">
+		      Soporte<a class="brown-text text-lighten-3" href="/"> ¿Problemas con tu Rockolapp? ¡Escribenos!</a>
+		      </div>
+		    </div>
+		 </footer>
+	</body>
+</html>	
