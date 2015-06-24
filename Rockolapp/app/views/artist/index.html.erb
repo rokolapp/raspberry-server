@@ -1,29 +1,121 @@
-<%= javascript_include_tag "artist", params[:controller] %>
-<h1>Busca los artistas</h1>
-<div>
-	<div>
-		<h2>Buscar por Spotify Id</h2>
-		<p>
-			Id:
-			<br>
-			<input id='index_artist_spotify_id'>
-		</p>
-		<p>
-			<button id='index_search_artist' onclick='searchArtist("spotify_id")'>Buscar</button>
-		</p>
-	</div>
-	<div>
-		<h2>Buscar por Nombre</h2>
-		<p>
-			Nombre:
-			<br>
-			<input id='index_artist_name'>
-		</p>
-		<p>
-			<button id='index_search_artist' onclick='searchArtist("name")'>Buscar</button>
-		</p>
-	</div>
-</div>
-<div id='artists_index_field'>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+	  	<title>Rockolapp</title>
 
-</div>
+	  	<!-- CSS  -->
+	  	<link href="/assets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	  	<link href="/assets/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+	  	<!--  Scripts-->
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="/assets/materialize.js"></script>
+		<script src="/assets/init.js"></script>  
+	</head>
+	<body>
+			<nav class="teal darken-4" role="navigation">
+				
+				<ul id="buscar" class="dropdown-content">
+					<li><a href="/track/">Cancion</a></li>
+					<li class="divider"></li>
+					<li><a href="/artist/">Artista</a></li>
+					<li class="divider"></li>
+					<li><a href="/album/">Albúm</a></li>
+					<li class="divider"></li>
+				</ul>
+
+				<ul id="administrar" class="dropdown-content">
+				  <li><a href="#!">Crear nueva lista</a></li>
+				  <li class="divider"></li>
+				  <li><a href="#!">Listas</a></li>
+				  <li class="divider"></li>
+				  <li><a href="#!">Agregar resultado</a></li>
+				  <li class="divider"></li>
+				  <li><a href="#!">Eliminar</a></li>
+				</ul>
+
+			    <div class="nav-wrapper container">
+			      <a id="logo-container" href="/" class="brand-logo">Rockolapp</a>
+			      <ul class="right hide-on-med-and-down">
+			        <li><a href="#">Mapa</a></li>
+			      </ul>
+			      <ul class="right hide-on-med-and-down">
+			      	<li><a href="#">Local</a></li>
+			      </ul>
+			      <ul class="right hide-on-med-and-down">
+			      	<li><a class="dropdown-button" data-activates="buscar">Buscar...</a></li>
+			      </ul>
+			      <ul class="right hide-on-med-and-down">
+			      	<li><a class="dropdown-button" data-activates="administrar">&nbsp Administrar <i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+			      </ul>
+			      
+			      <ul id="nav-mobile" class="side-nav">
+			        <li><a href="#">Navbar Link</a></li>
+			      </ul>
+			      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+			    </div>
+			</nav>
+		    <div id="index-banner" class="parallax-container">
+		    	<div class="section no-pad-bot">
+			      <div class="container">
+			        <br><br>
+			        	<h1> Busqueda de artitas </h1>
+			        <br><br>
+			      </div>
+		    	</div>
+	    	</div>
+		    <div class="parallax">
+		    	<%= image_tag "dashimage.jpg", :alt => "Facebook", :title => "Facebook"%>
+		    </div>
+		
+		<div class="container">
+		    <div class="section">
+	    	<%= javascript_include_tag "artist", params[:controller] %>
+		      <div class="row">
+
+		        <div class="col s6">
+		          <div class="icon-block">
+		            <h5 class="center">Por Nombre: </h5>
+					<p>
+						Nombre:
+						<br>
+						<input id='index_artist_name' class="input-field col s6">
+					</p>
+					<p>
+						<button id='index_search_artist' onclick='searchArtist("name")' class="waves-effect waves-light btn">Buscar</button>
+					</p>
+		          </div>
+		        </div>
+
+		        <div class="col s6">
+		          <div class="icon-block">
+		            <h5 class="center">Por ID: </h5>
+					<p>
+						Id:
+						<br>
+						<input id='index_artist_spotify_id' class="input-field col s6">
+					</p>
+					<p>
+						<button id='index_search_artist' class="waves-effect waves-light btn" onclick='searchArtist("spotify_id")'>Buscar</button>
+					</p>			
+		          </div>
+		        </div>
+
+		        <div class="col s12 center" id='artists_index_field'>
+					
+				</div>
+		      </div>
+	    	</div>
+  		</div>
+
+		<footer class="page-footer green">
+		    <div class="footer-copyright">
+		      <div class="container">
+		      Elaborado con:<a class="brown-text text-lighten-3" href="#"> Ruby on Rails, Materialize, Javascript</a>
+		      </div>
+		    </div>
+		 </footer>
+	</body>
+</html>

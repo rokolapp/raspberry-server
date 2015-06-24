@@ -1,26 +1,118 @@
-<% unless session[:admin] or session[:superuser] %>
-	<% if flash[:notice] %>
-		<div class="notice"><%= flash[:notice] %></div>
-	<% end %>
-	<h1>Login</h1>
-	<%= form_for :login, url: '/login', method: 'POST' do |f| %>
-		<p>
-			<%= f.label 'Login as:' %>
-			<br>
-			<%= f.select :user, options_for_select([['Admin', 'admin'],['Superuser', 'superuser']]) %>
-		</p>
-		<p>
-			<%= f.label 'E-mail' %>
-			<br>
-			<%= f.text_field :email %>
-		</p>
-		<p>
-			<%= f.label :Password %>
-			<br>
-			<%= f.password_field :password %>
-		</p>
-		<p>
-			<%= f.submit %>
-		</p>
-	<% end %> 
-<% end %>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+	  	<title>Rockolapp</title>
+
+	  	<!-- CSS  -->
+	  	<link href="/assets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+	  	<!--  Scripts-->
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="/assets/materialize.js"></script> 
+	</head>
+	<body>
+		<nav class="indigo darken-4" role="navigation">
+		    <div class="nav-wrapper container">
+		      <a id="logo-container" href="/" class="brand-logo">Rockolapp</a>
+		      <ul class="right hide-on-med-and-down">
+		        <li><a href="/login">Administrador</a></li>
+		      </ul>
+		      <ul class="right hide-on-med-and-down">
+		      	<li><a href="#">Cónocenos</a></li>
+		      </ul>
+		      <ul class="right hide-on-med-and-down">
+		      	<li><a href="/buy.html">Compra</a></li>
+		      </ul>
+		      <!-- Móvil -->
+		      <ul id="nav-mobile" class="side-nav">
+		        <li><a href="#">Navbar Link</a></li>
+		      </ul>
+		      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+		    </div>
+		</nav>
+
+		<div id="index-banner" class="parallax-container">
+		    <div class="section no-pad-bot">
+		      <div class="container">
+		        <br><br>
+		        <h1 class="header center blue-text text-accent-2">¿Nuevo?</h1>
+		        <div class="row center">
+
+		          <h5 class="header col s12 light">Comienza acá</h5>
+		        </div>
+		        <div class="row center">
+		          <a href="/admin/new" id="download-button" class="btn-large waves-effect waves-light blue darken-4">Registro</a>
+		        </div>
+		        <br><br>
+		      </div>
+		    </div>
+		    <div class="parallax">
+		    	<%= image_tag "electronica.jpg", :alt => "Facebook", :title => "Facebook"%>
+		    </div>
+		</div>
+
+		<div class="container">
+		    <div class="section">
+		    	<% unless session[:admin] or session[:superuser] %>
+					<% if flash[:notice] %>
+						<div class="notice"><%= flash[:notice] %></div>
+					<% end %>
+					<h1>Login</h1>
+					<%= form_for :login, url: '/login', class: 'col s12', method: 'POST' do |f| %>
+					<div class= "row">
+						<div class="input-field col s12">
+							<p>
+								<%= f.label 'Login as:' %>
+								<br>
+								<%= radio_button_tag(:user, "Administrador") %>
+								<%= label_tag(:user_admin, "Jeje es neta")%>
+							</p>
+							<!--<input name='login[user]' type='hidden' value='admin'>-->
+						</div>
+					</div>
+					<div class="row">	
+						<div class="input-field col s12">
+							<p>
+								<%= f.label 'E-mail' %>
+								<br>
+								<%= f.text_field :email, type:'email',  class:'validate', id:'email'%>
+							</p>
+						</div>
+					</div>
+					<div class="row">	
+						<div class="input-field col s12">
+							<p>
+								<%= f.label :Password %>
+								<br>
+								<%= f.text_field :password, type: 'password', class:'validate', id:'password' %>
+							</p>
+						</div>
+					</div>	
+					<div class="row center">
+						<button class="btn waves-effect indigo-light" type="submit" name="action">Enviar
+						    <i class="mdi-content-send right"></i>
+						 </button>
+					</div>	
+				<% end %> 
+			<% end %>
+		    </div>
+   		</div>
+	  		<footer class="page-footer teal">
+		    <div class="container">
+		      <div class="row">
+		        <div class="col l6 s12">
+		          <h5 class="white-text">Informes en:</h5>
+		          <p class="grey-text text-lighten-4">Calle Goldsmith 35, Miguel Hidalgo, Polanco, 11530 Ciudad de México, D.F.</p>
+		        </div>
+		      </div>
+		    </div>
+		    <div class="footer-copyright">
+		      <div class="container">
+		      Elaborado con:<a class="brown-text text-lighten-3" href="http://materializecss.com"> Ruby on Rails, Materialize, Javascript</e
+		      </div>
+		    </div>
+		 </footer>
+	</body>
+</html>
