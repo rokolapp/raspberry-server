@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   post '/playlist/new' => 'playlist#save'
   get 'playlist/search' => 'playlist#search'
 
+  get '/dashboard' => 'dashboard#dashboard'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
