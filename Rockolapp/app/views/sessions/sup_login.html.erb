@@ -7,13 +7,13 @@
     <div class="section no-pad-bot">
       <div class="container">
         <br><br>
-        <h1 class="header center blue-text text-accent-2">¿Superuser?</h1>
+        <h1 class="header center blue-text text-accent-2">¿Admin?</h1>
         <div class="row center">
 
           <h5 class="header col s12 light">Comienza acá</h5>
         </div>
         <div class="row center">
-          <a href="/suplogin" id="download-button" class="btn-large waves-effect waves-light blue darken-4">Login</a>
+          <a href="/login" id="download-button" class="btn-large waves-effect waves-light blue darken-4">Login</a>
         </div>
         <br><br>
       </div>
@@ -33,7 +33,7 @@
 			<%= form_for :login, url: '/login', class: 'col s12', method: 'POST' do |f| %>
 			<div class= "row">
 				<div class="input-field col s12">
-					<input name='login[user]' type='hidden' value='admin'>
+					<input name='login[user]' type='hidden' value='superuser'>
 				</div>
 			</div>
 			<div class="row">	

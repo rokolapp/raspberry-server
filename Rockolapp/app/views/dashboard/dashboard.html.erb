@@ -1,0 +1,22 @@
+<% content_for :for_head do %>
+  <%= render :partial => 'headContent/materialize' %>
+<% end %>
+<%= render :partial => 'statics/teal_nav_bar' %>
+<div id="index-banner" class="parallax-container">
+	<div class="section no-pad-bot">
+      <div class="container">
+        <br>
+        <br>
+        <h1 class="header center lime-text text-accent-4">¡Bienvenido!</h1>
+        <div class="row center">
+          <h5 class="header col s12 light">Administra la música de tu establecimiento</h5>
+        </div>
+        <br>
+        <br>
+      </div>
+	</div>
+</div>
+<div class="parallax">
+	<%= image_tag "dashimage.jpg", :alt => "dashimage", :title => "dashimage"%>
+</div>
+<%= render :partial => 'statics/page_footer2' %>

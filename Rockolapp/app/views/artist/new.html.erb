@@ -1,4 +1,7 @@
-<%= javascript_include_tag "artist", params[:controller] %>
+<% content_for :for_head do %>
+	<link href="/assets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+<% end %>
+
 <% if @artist.errors.any? %>
 	<h1>Se encontraron los siguientes errores al registrar su artista:</h1>
 	<% @artist.errors.full_messages.each do |e| %>
@@ -12,3 +15,4 @@
 <div id='artists_forms'>
 
 </div>
+<%= javascript_include_tag "artist", params[:controller] %>

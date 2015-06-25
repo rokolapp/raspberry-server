@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   #Login routes
   get '/login' => 'sessions#login', as: 'login'
+  get '/suplogin' => 'sessions#sup_login'
   post '/login' => 'sessions#loging'
   get '/logout' => 'sessions#logout'
 
@@ -28,7 +29,7 @@ Rails.application.routes.draw do
   get '/playlist/new' => 'playlist#new'
   post '/playlist/new' => 'playlist#save'
   get 'playlist/search' => 'playlist#search'
-
+  get '/dashboard' => 'dashboard#dashboard'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

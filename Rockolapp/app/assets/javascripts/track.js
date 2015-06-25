@@ -19,7 +19,7 @@ function post(id,list){
 	if(confirm('¿Desea registrar la cancion?')){
 		$.ajax({
 			type: 'POST',
-			url: '/playlist',
+			url: '/track',
 			data: {
 				token: token,
 				name: name,
@@ -36,30 +36,30 @@ function post(id,list){
 	else{}
 }
 function create_forms(data){
-	playlistsForms = $('#playlists_forms');
-	playlistsForms.html('');
-	playlists = data.playlists.items;
-	if(playlists.length == 0){
-		playlistsForms.append('<h1>No se encontraron coincidencias</h1>');
+	tracksForms = $('#tracks_forms');
+	tracksForms.html('');
+	tracks = data.tracks.items;
+	if(tracks.length == 0){
+		tracksForms.append('<h1>No se encontraron coincidencias</h1>');
 		return;
 	}
-	for(var i = 0; i < playlists.length; i++){
+	for(var i = 0; i < tracks.length; i++){
 
-		name = playlists[i].name;
-		if(playlists[i].album.images.length != 0){
-			image = playlists[i].album.images[0].url;
+		name = tracks[i].name;
+		if(tracks[i].album.images.length != 0){
+			image = tracks[i].album.images[0].url;
 		}
 		else{
 			image = '/no_image.png'
 		}
-		uri = playlists[i].uri;
-		id = playlists[i].id
+		uri = tracks[i].uri;
+		id = tracks[i].id
 		autToken = $('#authenticity_tokens').val();
-		playlistsForms.append(
+		tracksForms.append(
 			"<hr>"+
-			"<div class='playlist_forms' id='playlist_form_for_"+id+"'>"+
+			"<div class='track_forms' id='track_form_for_"+id+"'>"+
 			"<input type='hidden' id='"+id+"_token'name='authenticity_token' value='"+autToken+"'>"+
-				"<div class='playlist_image'>"+
+				"<div class='track_image'>"+
 					"<label>Imágen:</label><br>"+
 					"<img src='"+image+"' width='100' height='200'>"+
 				"</div>"+
@@ -87,22 +87,22 @@ function create_forms(data){
 		);
 	}
 }
-function searchAlbum(criteria){
+function searchTrack(criteria){
 
-	name = $("#index_playlist_name").val();
-	id = $("#index_playlist_spotify_id").val();
-	playlistsField = $('#playlists_index_field');
+	name = $("#index_track_name").val();
+	id = $("#index_track_spotify_id").val();
+	tracksField = $('#tracks_index_field');
 
 	$.ajax({
 		type: 'GET',
-		url: '/search_playlist',
+		url: '/search_track',
 		data: {
 			criteria: criteria,
 			name: name,
 			spotify_id: id,
 		}
 	}).done(function(data){
-		playlistsField.html('');
+		tracksField.html('');
 		if(data.length > 0){
 			for(var i = 0; i < data.length; i++){
 
@@ -110,7 +110,7 @@ function searchAlbum(criteria){
 				uri = data[i].uri;
 				list = data[i].list;
 
-				playlistsField.append(
+				tracksField.append(
 					"<hr>"+
 					"<div>"+
 						"<label>Nombre:</label>"+
@@ -124,12 +124,12 @@ function searchAlbum(criteria){
 						"<label>Lista:</label>"+
 						"<p>"+readList(list)+"</p>"+
 					"</div>"+
-					"<a data-confirm=\"Rlly m8?\" rel=\"nofollow\" data-method=\"delete\" href=\"playlist/"+data[i].id+"\">Delete</a>"+
+					"<a data-confirm=\"Rlly m8?\" rel=\"nofollow\" data-method=\"delete\" href=\"/track/"+data[i].id+"\">Delete</a>"+
 					"<hr>"
 				);
 			}
 		}else{
-			playlistsField.html('<H1>No se encontraron resultados</>');
+			tracksField.html('<H1>No se encontraron resultados</>');
 		}
 	}).fail(function(xhr, status, error){
 		alert(xhr.getResponseHeader('errors'));
@@ -137,15 +137,15 @@ function searchAlbum(criteria){
 
 }
 $(document).ready(function(){
-	$('#search_playlists_btn').click(function(){
-		spotify_query('search_playlists_txt','15','playlist',function(data){
+	$('#search_tracks_btn').click(function(){
+		spotify_query('search_tracks_txt','15','track',function(data){
 			create_forms(data);
 		});
 		}
 	);
-	$('#search_playlists_txt').keyup(function (e) {
+	$('#search_tracks_txt').keyup(function (e) {
 	    if (e.keyCode == 13) {
-			spotify_query('search_playlists_txt','15','playlist',function(data){
+			spotify_query('search_tracks_txt','15','track',function(data){
 				create_forms(data);
 			});
 	    }

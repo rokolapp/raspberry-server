@@ -1,127 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-	  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-	  	<title>Rockolapp</title>
+<% content_for :for_head do %>
+	<%= render :partial => 'headContent/materialize' %>
+	<%= render :partial => 'headContent/index_style' %>
+<% end %>
+<%= render 'statics/blue_nav_bar' %>
+<div class="dark-opacity">
+	<div id="index-banner" class="extended-parallax-container">
+	    <div class="section no-pad-bot">
+	      <div class="container">
+	        <br><br>
+	        <h1 class="header center blue-text text-lighten-3 font-cantarell">Rockolapp</h1>
+	        <div class="row center">
+	          <h5 class="header col s12 light">La mejor forma de compartir tu musica con los que te rodean</h5>
+	        </div>
+	        <br><br><br>
+	        <div class="row center">
+	          <a href="https://play.google.com/store" id="download-button" class="btn-large waves-effect waves-light blue lighten-3">Descarga la app</a>
+	        </div>
+	        <br><br>
+	      </div>
+	    </div>
+	</div>
+</div>
 
-	  	<!-- CSS  -->
-	  	<link href="/assets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
-	  	<!--  Scripts-->
-		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="/assets/materialize.js"></script>
-	</head>
-	<body>
-		<nav class="indigo darken-4" role="navigation">
-		    <div class="nav-wrapper container">
-		      <a id="logo-container" href="/" class="brand-logo">Rockolapp</a>
-		      <ul class="right hide-on-med-and-down">
-		        <li><a href="/login">Administrador</a></li>
-		      </ul>
-		      <ul class="right hide-on-med-and-down">
-		      	<li><a href="#">Cónocenos</a></li>
-		      </ul>
-		      <ul class="right hide-on-med-and-down">
-		      	<li><a href="buy.html">Compra</a></li>
-		      </ul>
-		      <ul id="nav-mobile" class="side-nav">
-		        <li><a href="#">Navbar Link</a></li>
-		      </ul>
-		      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-		    </div>
-		</nav>
+<div class="conocela">
 
-		<div id="index-banner" class="parallax-container">
-		    <div class="section no-pad-bot">
-		      <div class="container">
-		        <br><br>
-		        <h1 class="header center blue-text text-accent-2">Rockolapp</h1>
-		        <div class="row center">
-		          <h5 class="header col s12 light">Revoluciona la manera en la que escuchas música</h5>
-		        </div>
-		        <div class="row center">
-		          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light blue darken-4">Descarga nuestra app</a>
-		        </div>
-		        <br><br>
-		      </div>
-		    </div>
-		    <div class="parallax">
-		    	<%= image_tag "background1.jpg", :alt => "Facebook", :title => "Facebook"%>
-		    </div>
+	<div class="seccion">
+		<div class="row">
+			<div class="col s12">
+				<div class="conocela-title center-text">
+					  <h3 class="white-text">
+					  	Conocela
+					  </h3>
+				</div>
+			</div>
 		</div>
+	</div>			
 
-		<div class="container">
-		    <div class="section">
-		      <!--   Icon Section   -->
-		      <div class="row">
-		        <div class="col s12 m4">
-		          <div class="icon-block">
-		            <h2 class="center indigo-text"><i class="mdi-image-flash-on"></i></h2>
-		            <h5 class="center">Versatil</h5>
+    <div class="seccion">
+		<div class="row">
 
-		            <p class="light">¡Rockopods cabe en la palma de tu mano, ahorra espacio y ofrece más potencia! Ahorra espacio en tu establecimiento, funciona fácilmente .</p>
-		          </div>
-		        </div>
+			<div class="col s12 m4 card-conocenos">
+				<div class="z-depth-2 ">
+					<div>
+						<img src="/assets/versatil.jpg" class="conocenos-img" >
+						</div>
+					<div class="white-text blue-grey conocenos-content">
+						<span class="card-title">Versatil</span>
+						<p class="light">¡Rockolapp cabe en la palma de tu mano, ahorra espacio y ofrece más potencia! Ahorra espacio en tu establecimiento, funciona fácilmente .</p>
+					</div>
+				</div>
+			</div>
 
-		        <div class="col s12 m4">
-		          <div class="icon-block">
-		            <h2 class="center indigo-text"><i class="mdi-social-group"></i></h2>
-		            <h5 class="center">Comparte</h5>
+			<div class="col s12 m4 card-conocenos">
+				<div class="z-depth-2 ">
+					<div>
+						<img src="/assets/music-sharing-2.jpg" class="conocenos-img" >
+						</div>
+					<div class="white-text blue-grey conocenos-content">
+						<span class="card-title">Comparte</span>
+						<p class="light">Abre la aplicación, ve a la sección del mapa y dentro de este encontraras una diversidad de establecimientos afiliados a nuestro producto. Cuando estes en uno con un simple click estarás escuchando tu música</p>
+					</div>
+				</div>
+			</div>
 
-		            <p class="light">Abre la aplicación, ve a la sección del mapa y dentro de este encontraras una diversidad de establecimientos afiliados a nuestro producto. Cuando estes en uno con un simple click estarás escuchando tu música</p>
-		          </div>
-		        </div>
+			<div class="col s12 m4 card-conocenos">
+				<div class="z-depth-2">
+					<div>
+						<img src="/assets/dancing.jpg" class="conocenos-img" >
+						</div>
+					<div class="white-text blue-grey conocenos-content">
+						<span class="card-title">Escucha</span>
+						<p class="light">Las playlist se irán actualizando conforme la gente lo requiera, escucha la música que tus vecinos oyen, comparte tus gustos, haz favoritos y bloquea la música que sea inapropiada</p>
+					</div>
+				</div>
+			</div>
 
-		        <div class="col s12 m4">
-		          <div class="icon-block">
-		            <h2 class="center indigo-text"><i class="mdi-action-settings"></i></h2>
-		            <h5 class="center">Escucha</h5>
+      </div>
+	</div>
+</div>
 
-		            <p class="light">Las playlist se irán actualizando conforme la gente lo requiera, escucha la música que tus vecinos oyen, comparte tus gustos, haz favoritos y bloquea la música que sea inapropiada</p>
-		          </div>
-		        </div>
-		      </div>
-	    	</div>
-  		</div>
-		<div class="parallax-container valign-wrapper">
-		    <div class="section no-pad-bot">
-		      <div class="container">
-		        <div class="row center">
-		          <h5 class="header col s12 light">Tú estilo acompañandote siempre</h5>
-		        </div>
-		      </div>
-		    </div>
-		    <div class="parallax"><%= image_tag "background2.jpg", :alt => "Background2", :title => "Background2"%></div>
-		  </div>
-
-		  <div class="container">
-		    <div class="section">
-
-		      <div class="row">
-		        <div class="col s12 center">
-		          <h3><i class="mdi-content-send indigo-text"></i></h3>
-		          <h4>¡Encuentrános en Google Play!</h4>
-		          <p class="left-align light"></p>
-		        </div>
-		      </div>
-
-		    </div>
-		 </div>
-		 <footer class="page-footer teal">
-		    <div class="container">
-		      <div class="row">
-		        <div class="col l6 s12">
-		          <h5 class="white-text">Informes en:</h5>
-		          <p class="grey-text text-lighten-4">Calle Goldsmith 35, Miguel Hidalgo, Polanco, 11530 Ciudad de México, D.F.</p>
-		        </div>
-		      </div>
-		    </div>
-		    <div class="footer-copyright">
-		      <div class="container">
-		      Elaborado con:<a class="brown-text text-lighten-3" href="http://materializecss.com"> Ruby on Rails, Materialize, Javascript</a>
-		      </div>
-		    </div>
-		 </footer>
-	</body>
-</html>
+<%= render 'statics/page_footer' %>

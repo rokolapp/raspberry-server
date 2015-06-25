@@ -1,6 +1,13 @@
 class SessionsController < ApplicationController
 	def login
-	
+		unless on_session?
+			redirect_to '/'
+		end
+	end
+	def sup_login
+		unless on_session?
+			redirect_to '/'
+		end
 	end
 	def loging
 		if user_param == 'admin'

@@ -1,0 +1,39 @@
+<% unless session[:admin] or session[:superuser] %>
+  <nav class="navigation blue lighten-3">
+      <div class="container">
+        <a id="logo-container" href="/" class="brand-logo font-cantarell">Rockolapp</a>
+
+        <ul class="right hide-on-med-and-down font-cantarell">
+          <li><a href="/login">Controla tu rockola</a></li>
+        </ul>
+
+        <ul class="right hide-on-med-and-down font-cantarell">
+        	<li><a href="https://www.facebook.com/pages/Rockolapp/454959431353058?skip_nax_wizard=true&ref_type=logout_gear">Contactanos</a></li>
+        </ul>
+
+        <ul class="right hide-on-med-and-down font-cantarell">
+        	<li><a href="#">Conocela</a></li>
+        </ul>
+        
+        <!-- Movil -->
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="#"></a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+
+      </div>
+  </nav>
+<% else %>
+  <nav class="navigation blue lighten-3">
+      <div class="container">
+        <a id="logo-container" href="/" class="brand-logo font-cantarell">Rockolapp</a>
+
+        <ul class="right hide-on-med-and-down font-cantarell">
+          <li><a href="/logout">Cerrar sesión</a></li>
+        </ul>
+        <ul class="right hide-on-med-and-down font-cantarell">
+          <li><a href="/dashboard">Admin</a></li>
+        </ul>
+      </div>
+  </nav>
+<% end %>
